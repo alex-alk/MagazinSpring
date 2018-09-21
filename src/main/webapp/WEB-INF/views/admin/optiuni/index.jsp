@@ -17,13 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<form action="" id="login">
-	    	<label>Nume de utilizator:</label><br>
-	    	<input type="text"><br>
-	    	<label>Parola:</label><br>
-    		<input type="text"><br>
-    		<button type="submit">Intră în cont</button>
-    		<button type="submit">Schimbă parola</button>
-    	</form>
-    </body>
+	<ul id="opt">
+		<li><a href=adauga.jsp>Adaugă articole</a></li>
+	</ul>
+	</body>
 </html>

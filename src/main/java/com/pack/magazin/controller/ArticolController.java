@@ -6,15 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.pack.magazin.dao.AdminDAO;
+import com.pack.magazin.dao.ArticolDAO;
 
 @Controller
-public class AdminController {
+public class ArticolController {
 	@Autowired
-	AdminDAO adminDAO;
+	ArticolDAO articolDAO;
 	
-	@RequestMapping("/admini")
-	public String getAdmins(Model model) {
-		model.addAttribute("admini",adminDAO.getAdmins());
-		return "admins";
+	@RequestMapping("/articole")
+	public String getArticole(Model model) {
+		model.addAttribute("articole",articolDAO.getArticole());
+		return "articole";
 	}
 }

@@ -92,3 +92,38 @@ header>ul{
 	margin-left: 100px;
 	padding: 5px;
 }
+#login{
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	padding: 5px;
+	width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 20%;
+}
+#login button{
+	margin-top: 10px;
+}
+#login button:hover{
+	transform: scale(1.03);
+}
+#opt{
+	list-style-type: none;
+	width: 250px;
+	margin:0 auto;
+	margin-top: 15%;
+}
+#opt li{
+	text-align: center;
+}
+#opt a{
+	display: block;
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 10em;
+	margin-top: 7px;
+	border-radius: 3px;
+}

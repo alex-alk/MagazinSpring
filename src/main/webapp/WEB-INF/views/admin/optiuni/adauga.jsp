@@ -17,13 +17,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<form action="" id="login">
-	    	<label>Nume de utilizator:</label><br>
-	    	<input type="text"><br>
-	    	<label>Parola:</label><br>
-    		<input type="text"><br>
-    		<button type="submit">Intră în cont</button>
-    		<button type="submit">Schimbă parola</button>
-    	</form>
-    </body>
+		<a href="index.jsp">Pagina de start</a>
+		<form action="articole" method=POST>
+			<table>
+				<tr>
+					<td>
+						<input type="file"><br>
+						<p>Dim: 144px X 144px</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Denumire:</p>
+						<input type="text">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Preț:</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Categorie:</p>
+						<input type="text">
+					</td>
+				</tr>
+			</table>
+			<textarea name="descriere"></textarea>
+			<button type="submit">Adaugă</button>
+		</form>
+	</body>
 </html>
