@@ -12,13 +12,12 @@ import javax.persistence.*;
 @NamedQuery(name="Oferte.findAll", query="SELECT o FROM Oferte o")
 public class Oferte implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	private int id;
-
 	private String url;
 
 	public Oferte() {
 	}
+
 
 	public int getId() {
 		return this.id;
@@ -27,6 +26,7 @@ public class Oferte implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public String getUrl() {
 		return this.url;

@@ -12,15 +12,13 @@ import javax.persistence.*;
 @NamedQuery(name="Admin.findAll", query="SELECT a FROM Admin a")
 public class Admin implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	private int id;
-
 	private String password;
-
 	private String username;
 
 	public Admin() {
 	}
+
 
 	public int getId() {
 		return this.id;
@@ -30,6 +28,7 @@ public class Admin implements Serializable {
 		this.id = id;
 	}
 
+
 	public String getPassword() {
 		return this.password;
 	}
@@ -37,6 +36,7 @@ public class Admin implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 	public String getUsername() {
 		return this.username;
