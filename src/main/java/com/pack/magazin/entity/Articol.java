@@ -17,7 +17,8 @@ public class Articol implements Serializable {
 
 	@Lob
 	private String descriere;
-
+	
+	@Id
 	private int id;
 
 	private String imagineURL;

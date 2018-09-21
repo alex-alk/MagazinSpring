@@ -21,6 +21,7 @@ public class Comenzi implements Serializable {
 	@Column(name="clienti_id")
 	private int clientiId;
 
+	@Id
 	private int id;
 
 	public Comenzi() {

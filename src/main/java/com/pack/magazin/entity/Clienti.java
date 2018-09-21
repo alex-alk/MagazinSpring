@@ -14,7 +14,8 @@ public class Clienti implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String email;
-
+	
+	@Id
 	private int id;
 
 	private String nume;
