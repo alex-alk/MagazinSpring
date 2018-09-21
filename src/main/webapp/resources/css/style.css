@@ -1,0 +1,94 @@
+body{
+	background-color: #d6e9c6;
+}
+a:hover{
+	text-decoration: none;
+	color: white;
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+header h1{
+	text-align: center;
+	font-family: serif;
+	color: #255625;
+}
+header li{
+	list-style-type: none;
+	text-align: center;
+}
+header a{
+	display: block;
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 10em;
+	margin-top: 7px;
+	border-radius: 3px;
+}
+header>ul{
+	float: left;
+	margin-left:-30px;
+}
+#headerImg{
+	display: block;
+	margin: 0 auto;
+	width: 30%;
+	min-width: 240px;
+}
+#headerRight a{
+	padding: 0px;
+}
+#headerRight a{
+	text-align: center;
+	padding-bottom: 5px;
+}
+#headerRight{
+	float: right;
+	margin-right: 10px;
+}
+#headerRight>li:nth-child(2){
+	width: 11.6em;
+	text-align: left;
+	font-size: 85%;
+	margin-top: 20px;
+}
+#call{
+	float: left;
+	padding-top: 10px;
+	padding-right: 5px;
+	
+}
+#headerRight p{
+	color: green;
+	font-weight: bold;
+	font-size: 123%;
+	padding-left: 30px;
+}
+#cos{
+	float: left;
+	margin-right: -15px;
+}
+#asideRight{
+	float: left;
+	margin-top: 20px;
+	clear: right;
+	background-color: rgba(100,150,100,0.5);
+	border-radius: 5px;
+	padding: 5px;
+}
+#asideRight label{
+	margin-left: 5px;
+}
+#asideRight label:hover{
+	cursor: pointer;
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+#main{
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	margin-left: 100px;
+	padding: 5px;
+}
