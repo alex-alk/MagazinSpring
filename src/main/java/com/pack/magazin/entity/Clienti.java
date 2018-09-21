@@ -12,16 +12,22 @@ import javax.persistence.*;
 @NamedQuery(name="Clienti.findAll", query="SELECT c FROM Clienti c")
 public class Clienti implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	private String email;
+	
+	@Id
 	private int id;
+
 	private String nume;
+
 	private String parola;
+
 	private String prenume;
+
 	private String telefon;
 
 	public Clienti() {
 	}
-
 
 	public String getEmail() {
 		return this.email;
@@ -31,7 +37,6 @@ public class Clienti implements Serializable {
 		this.email = email;
 	}
 
-
 	public int getId() {
 		return this.id;
 	}
@@ -39,7 +44,6 @@ public class Clienti implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getNume() {
 		return this.nume;
@@ -49,7 +53,6 @@ public class Clienti implements Serializable {
 		this.nume = nume;
 	}
 
-
 	public String getParola() {
 		return this.parola;
 	}
@@ -58,7 +61,6 @@ public class Clienti implements Serializable {
 		this.parola = parola;
 	}
 
-
 	public String getPrenume() {
 		return this.prenume;
 	}
@@ -66,7 +68,6 @@ public class Clienti implements Serializable {
 	public void setPrenume(String prenume) {
 		this.prenume = prenume;
 	}
-
 
 	public String getTelefon() {
 		return this.telefon;

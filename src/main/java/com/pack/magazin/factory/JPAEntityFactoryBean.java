@@ -1,4 +1,4 @@
-package com.pack.magazin.entity;
+package com.pack.magazin.factory;
 
 import javax.annotation.*;
 import javax.persistence.*;
@@ -16,3 +16,4 @@ public class JPAEntityFactoryBean {
 		return entityManagerFactory;
 	}
 }
+

@@ -12,16 +12,21 @@ import javax.persistence.*;
 @NamedQuery(name="Comenzi.findAll", query="SELECT c FROM Comenzi c")
 public class Comenzi implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Column(name="articol_id")
 	private int articolId;
+
 	private int cantitate;
+
+	@Column(name="clienti_id")
 	private int clientiId;
+
+	@Id
 	private int id;
 
 	public Comenzi() {
 	}
 
-
-	@Column(name="articol_id")
 	public int getArticolId() {
 		return this.articolId;
 	}
@@ -29,7 +34,6 @@ public class Comenzi implements Serializable {
 	public void setArticolId(int articolId) {
 		this.articolId = articolId;
 	}
-
 
 	public int getCantitate() {
 		return this.cantitate;
@@ -39,8 +43,6 @@ public class Comenzi implements Serializable {
 		this.cantitate = cantitate;
 	}
 
-
-	@Column(name="clienti_id")
 	public int getClientiId() {
 		return this.clientiId;
 	}
@@ -48,7 +50,6 @@ public class Comenzi implements Serializable {
 	public void setClientiId(int clientiId) {
 		this.clientiId = clientiId;
 	}
-
 
 	public int getId() {
 		return this.id;

@@ -12,7 +12,7 @@ public class AdminController {
 	@Autowired
 	AdminDAO adminDAO;
 	
-	@RequestMapping("/courses")
+	@RequestMapping("/admini")
 	public String getAdmins(Model model) {
 		model.addAttribute("admins",adminDAO.getAdmins());
 		return "admins";

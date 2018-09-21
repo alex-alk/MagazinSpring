@@ -12,16 +12,23 @@ import javax.persistence.*;
 @NamedQuery(name="Articol.findAll", query="SELECT a FROM Articol a")
 public class Articol implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	private String categorie;
+
+	@Lob
 	private String descriere;
+	
+	@Id
 	private int id;
+
 	private String imagineURL;
+
 	private String nume;
+
 	private int pret;
 
 	public Articol() {
 	}
-
 
 	public String getCategorie() {
 		return this.categorie;
@@ -31,8 +38,6 @@ public class Articol implements Serializable {
 		this.categorie = categorie;
 	}
 
-
-	@Lob
 	public String getDescriere() {
 		return this.descriere;
 	}
@@ -40,7 +45,6 @@ public class Articol implements Serializable {
 	public void setDescriere(String descriere) {
 		this.descriere = descriere;
 	}
-
 
 	public int getId() {
 		return this.id;
@@ -50,7 +54,6 @@ public class Articol implements Serializable {
 		this.id = id;
 	}
 
-
 	public String getImagineURL() {
 		return this.imagineURL;
 	}
@@ -59,7 +62,6 @@ public class Articol implements Serializable {
 		this.imagineURL = imagineURL;
 	}
 
-
 	public String getNume() {
 		return this.nume;
 	}
@@ -67,7 +69,6 @@ public class Articol implements Serializable {
 	public void setNume(String nume) {
 		this.nume = nume;
 	}
-
 
 	public int getPret() {
 		return this.pret;

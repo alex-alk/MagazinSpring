@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import com.pack.magazin.entity.Admin;
-import com.pack.magazin.entity.JPAEntityFactoryBean;
+import com.pack.magazin.factory.JPAEntityFactoryBean;
 
 @Component
 public class AdminDAO {
