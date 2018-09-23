@@ -1,3 +1,3 @@
 # MagazinSpring
-admin page: /admin
-username and password: admin
+#admin page: /admin
+#username and password: admin
