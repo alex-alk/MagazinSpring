@@ -19,36 +19,36 @@
     </head>
     <body>
 		<a href="index.jsp">Pagina de start</a>
-		<form action="articolUpload" method="POST" enctype="multipart/form-data">
+		<form:form action="articolUpload" method="POST" enctype="multipart/form-data" modelAttribute="articolUpload">
 			<table>
 				<tr>
 					<td>  
-						<input type="file" name="file"><br>
+						<form:input type="file" path="file"/><br>
 						<p>Dim: 144px X 144px</p>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Denumire:</p>
-						<input name="nume"/>
+						<form:input path="nume"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Preț:</p>
-						<input name="pret"/>
+						<form:input path="pretStr"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Categorie:</p>
-						<input name="categorie"/>
+						<form:input path="categorie"/>
 					</td>
 				</tr>
 			</table>
-			<textarea name="descriere"></textarea>
+			<form:textarea path="descriere"></form:textarea>
 			<button type="submit">Adaugă</button>
-		</form>
+		</form:form>
 		<p>${msg}</p>
 	</body>
 </html>

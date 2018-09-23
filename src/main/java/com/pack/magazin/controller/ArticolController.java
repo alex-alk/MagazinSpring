@@ -11,20 +11,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.pack.magazin.dao.ArticolDAO;
+import com.pack.magazin.entity.Articol;
 import com.pack.magazin.model.ArticolUpload;
 
 @Controller
 public class ArticolController {
 	@Autowired
 	ArticolDAO articolDAO;
+	@Autowired
+	Articol articol;
 	
 	@RequestMapping(value="admin/optiuni/adauga",method = RequestMethod.GET)
-	   public String articolUpload(Model model) {
-		 //model.addAttribute("articolUpload", articolUpload); 	
+	   public String articolUploadSet(Model model, @Autowired ArticolUpload articolUpload) {
+		 model.addAttribute("articolUpload", articolUpload); 	
 	     return "admin/optiuni/adauga";
 	}
     @RequestMapping(value="admin/optiuni/articolUpload",method = RequestMethod.POST)
-    public String articolUpload(Model model, @RequestParam("file") MultipartFile file) throws IOException {
+    public String articolUpload(Model model, @ModelAttribute("articolUpload")ArticolUpload articolUpload) throws IOException {
+    	MultipartFile file = articolUpload.getFile();
+    	if(articolUpload.isNotValid()) {
+    		model.addAttribute("msg","Toate câmpurile sunt obligatorii");
+    		return "admin/optiuni/adauga";
+    	}
     	if (!file.getOriginalFilename().isEmpty()) {
 			String fullFileName = file.getOriginalFilename();
 		 	String fileName = fullFileName.substring(fullFileName.lastIndexOf("\\")+1, fullFileName.length());   	  
@@ -34,16 +42,21 @@ public class ArticolController {
 			     model.addAttribute("msg", "Fișierul există deja");
 		         return "admin/optiuni/adauga";
 			  }
-		 	}    	 
-          BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-                     						             new File("E:/mytemp", fileName)));
-          outputStream.write(file.getBytes());
-          outputStream.flush();
-          outputStream.close();
-          model.addAttribute("msg", "Articol adăugat");
-     } else {
+		 	}
+		   	articol.setCategorie(articolUpload.getCategorie());
+		   	articol.setDescriere(articolUpload.getDescriere());
+		   	articol.setImagineURL("E:\\temp\\" + fileName);
+		   	articol.setNume(articolUpload.getNume());
+		   	articol.setPret(articolUpload.getPret());
+	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
+	                     						             new File("E:/mytemp", fileName)));
+	        outputStream.write(file.getBytes());
+	        outputStream.flush();
+	        outputStream.close();
+	        model.addAttribute("msg", "articol adăugat");
+      } else {
           model.addAttribute("msg", "Selectează un fișier");
      }
      return "admin/optiuni/adauga";
-   }
+    }
 }
