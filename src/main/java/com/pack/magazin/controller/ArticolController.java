@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,13 @@ public class ArticolController {
 	@Autowired
 	Articol articol;
 	
+	@RequestMapping(value="/", method = RequestMethod.GET)
+		public String home(ArticolDAO articolDao, Model model) {
+			model.addAttribute("articole",articolDAO);
+			return "index";
+		}
 	@RequestMapping(value="admin/optiuni/adauga",method = RequestMethod.GET)
-	   public String articolUploadSet(Model model, @Autowired ArticolUpload articolUpload) {
+	   public String articolUploadSet(Model model, ArticolUpload articolUpload) {//@Autowired
 		 model.addAttribute("articolUpload", articolUpload); 	
 	     return "admin/optiuni/adauga";
 	}
@@ -45,9 +49,10 @@ public class ArticolController {
 		 	}
 		   	articol.setCategorie(articolUpload.getCategorie());
 		   	articol.setDescriere(articolUpload.getDescriere());
-		   	articol.setImagineURL("E:\\temp\\" + fileName);
+		   	articol.setImagineURL("E:\\mytemp\\" + fileName);
 		   	articol.setNume(articolUpload.getNume());
 		   	articol.setPret(articolUpload.getPret());
+		   	articolDAO.addArticol(articol);
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
 	                     						             new File("E:/mytemp", fileName)));
 	        outputStream.write(file.getBytes());
