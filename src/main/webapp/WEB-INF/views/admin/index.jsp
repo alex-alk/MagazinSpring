@@ -25,6 +25,5 @@
     		<button type="submit">Intră în cont</button>
     		<button type="submit">Schimbă parola</button>
     	</form>
-    	<p></p>
     </body>
 </html>
