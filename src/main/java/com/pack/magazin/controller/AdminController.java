@@ -12,9 +12,12 @@ public class AdminController {
 	@Autowired
 	AdminDAO adminDAO;
 	
-	@RequestMapping("/admini")
+	@RequestMapping(value="admin", method=RequestMethod.POST)
 	public String getAdmins(Model model) {
-		model.addAttribute("admini",adminDAO.getAdmins());
-		return "admins";
+		return "admin/optiuni/index";
+	}
+	@RequestMapping(value="admin", method=RequestMethod.GET)
+	public String adminPage() {
+		return "admin/index";
 	}
 }

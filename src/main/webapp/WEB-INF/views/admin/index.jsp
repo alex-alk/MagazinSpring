@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<form action="" id="login">
+    	<form action="admin" id="login" method="POST">
 	    	<label>Nume de utilizator:</label><br>
 	    	<input type="text"><br>
 	    	<label>Parola:</label><br>

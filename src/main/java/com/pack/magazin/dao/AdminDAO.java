@@ -22,8 +22,8 @@ public class AdminDAO {
 		EntityManager em = emf.createEntityManager();
 		
 		TypedQuery<Admin> adminQuery = em.createNamedQuery("Admin.findAll", Admin.class);
-		List<Admin> admini = adminQuery.getResultList();
+		List<Admin> admin = adminQuery.getResultList();
 		em.close();
-		return admini;
+		return admin;
 	}
 }
