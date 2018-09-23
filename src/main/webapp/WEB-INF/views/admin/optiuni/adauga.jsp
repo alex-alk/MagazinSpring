@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <html lang="ro">
     <head>
@@ -18,34 +19,36 @@
     </head>
     <body>
 		<a href="index.jsp">Pagina de start</a>
-		<form action="articole" method=POST>
+		<form action="articolUpload" method="POST" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td>
-						<input type="file"><br>
+					<td>  
+						<input type="file" name="file"><br>
 						<p>Dim: 144px X 144px</p>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Denumire:</p>
-						<input type="text">
+						<input name="nume"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Preț:</p>
+						<input name="pret"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Categorie:</p>
-						<input type="text">
+						<input name="categorie"/>
 					</td>
 				</tr>
 			</table>
 			<textarea name="descriere"></textarea>
 			<button type="submit">Adaugă</button>
 		</form>
+		<p>${msg}</p>
 	</body>
 </html>

@@ -3,11 +3,14 @@ package com.pack.magazin.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
+
 
 /**
  * The persistent class for the articol database table.
  * 
  */
+@Component
 @Entity
 @NamedQuery(name="Articol.findAll", query="SELECT a FROM Articol a")
 public class Articol implements Serializable {
