@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import com.pack.magazin.dao.AdminDAO;
 import com.pack.magazin.dao.ArticolDAO;
 
 @Controller
