@@ -19,7 +19,7 @@
     <body>
     <header>
     	<ul>
-    		<li><a href="index.jsp">Pagina de start</a></li>
+    		<li><a href="/">Pagina de start</a></li>
     		<li><a href="index.jsp">Înregistrare</a></li>
     		<li><a href="index.jsp">Intră în cont</a></li>
     	</ul>
@@ -31,7 +31,13 @@
     	<h1>Magazin acvaristică</h1>
     </header>
 	<body>
-	<div id=main></div>
-		${articol.nume}
+		<div id=main>
+			<article>
+				<p>Preț: ${articol.pret}</p>
+				<h3>${articol.nume}</h3>
+				<img src="${articol.imagineURL}">
+				<p>${articol.descriere}</p>
+			</article>
+		</div>
 	</body>
 </html>

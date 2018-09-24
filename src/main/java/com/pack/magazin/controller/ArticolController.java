@@ -12,17 +12,27 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pack.magazin.dao.ArticolDAO;
 import com.pack.magazin.entity.Articol;
 import com.pack.magazin.model.ArticolUpload;
+import com.pack.magazin.model.MainQuery;
 
 @Controller
 public class ArticolController {
 	@Autowired
-	ArticolDAO articolDAO;
+	private ArticolDAO articolDAO;
 	@Autowired
-	Articol articol;
+	private Articol articol;
+	@Autowired
+	private MainQuery mainQuery;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("articole",articolDAO.getArticole());
+		model.addAttribute("mainQuery", mainQuery);
+		return "index";
+	}
+	
+	@RequestMapping(value="cauta", method = RequestMethod.GET)
+	public String cauta(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery) {
+		model.addAttribute("articole",articolDAO.getArticoleByQueryModel(mainQuery));
 		return "index";
 	}
 	

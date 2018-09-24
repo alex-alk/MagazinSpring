@@ -16,7 +16,6 @@
         <meta name="description" content="Magazin online cu pești de acvariu, hrană, accesorii și acvarii.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
     <header>
     	<ul>
     		<li><a href="/">Pagina de start</a></li>
@@ -30,36 +29,23 @@
     	<img id="headerImg" src="/resources/img/header.png">
     	<h1>Magazin acvaristică</h1>
     </header>
-    	<form:form action="cauta" method="GET" modelAttribute="mainQuery">
-    		<div id="cauta">
-	   			<button type="submit">Caută:</button>
-	   			<form:input path="text"/>
-	   		</div>
-	   		<aside id="asideLeft">
-	    		<p>Categorii:</p>
-	    		<form:checkbox path="pesti" value="pesti" onclick="form.submit()"/><label for="pesti" >Pești</label><br>
-	    		<form:checkbox path="hrana" value="hrana" onclick="form.submit()"/><label for="hrana" >Hrană</label><br>
-	    		<form:checkbox path="accesorii" value="accesorii" onclick="form.submit()"/><label for="acc">Accesorii</label><br>
-	    		<form:checkbox path="acv" value="acv" onclick="form.submit()"/><label for="acv">Acvarii</label><br>
-	    		<p>Sortare:</p>
-	    		<form:checkbox path="den" value="den" onclick="form.submit()"/><label for="den">Denumire</label><br>
-	    		<form:checkbox path="pret" value="pret" onclick="form.submit()"/><label for="pret">Preț</label><br>
-    		</aside>
+    <body>
+    	<form:form action="inregistrare" id="login" method="POST" modelAttribute="client">
+	    	<label>Nume:</label><br>
+	    	<form:input path="nume"/><br>
+	    	<label>Prenume:</label><br>
+    		<form:input path="prenume"/><br>
+    		<label>Telefon:</label><br>
+    		<form:input path="telefon"/><br>
+    		<label>Adresa email</label>
+    		<form:input path="email"/><br>
+    		<label>Parola:</label><br>
+    		<form:input path="parola" id="conf1"/><br>
+    		<label>Confirmă parola:</label><br>
+    		<input  type="text" id="conf2"><br>
+    		<button type="submit">Înregistrare</button><br>
+    		<button >Schimbă parola</button>
     	</form:form>
-    <div id=main>
-    	<c:forEach items="${articole}" var="articol">
-	    	<table>
-	    		<tr>
-	    			<td><img src="${articol.imagineURL}"></td>
-	    		</tr>
-	    		<tr>
-	    			<td>${articol.nume}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>Preț: ${articol.pret} lei<a href="descriere?id=${articol.id}">AAAA</a>a></td>
-	    		</tr>
-	    	</table>
-    	</c:forEach>
-    </div>
+    	<p></p>
     </body>
 </html>

@@ -9,15 +9,15 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import com.pack.magazin.entity.Articol;
+import com.pack.magazin.entity.Client;
 import com.pack.magazin.factory.JPAEntityFactoryBean;
-import com.pack.magazin.model.MainQuery;
 
 @Component
-public class ArticolDAO {
+public class ClientDAO {
 	@Autowired
-	private JPAEntityFactoryBean entityFactoryBean;
+	JPAEntityFactoryBean entityFactoryBean;
 	
-	public List<Articol> getArticole(){
+	public List<Articol> getClienti(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
@@ -38,23 +38,12 @@ public class ArticolDAO {
 		em.close();
 		return articole;
 	}
-	public List<Articol> getArticoleByQueryModel(MainQuery mainQuery){
-		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
-		EntityManager em = emf.createEntityManager();
-		
-		TypedQuery<Articol> articolQuery = em.createNamedQuery("Articol.findByQuery", Articol.class);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
-		articolQuery.setParameter("text", mainQuery.getText());
-		List<Articol> articole = articolQuery.getResultList();
-		em.close();
-		return articole;
-	}
-	public void addArticol (Articol articol) {
+	public void addClient (Client client) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
-		em.persist(articol);
+		em.persist(client);
 		txn.commit();
 	}
 }

@@ -3,7 +3,7 @@
 	<persistence-unit name="MagazinSpring" transaction-type="RESOURCE_LOCAL">
 		<class>com.pack.magazin.entity.Admin</class>
 		<class>com.pack.magazin.entity.Articol</class>
-		<class>com.pack.magazin.entity.Clienti</class>
+		<class>com.pack.magazin.entity.Client</class>
 		<class>com.pack.magazin.entity.Comenzi</class>
 		<class>com.pack.magazin.entity.Oferte</class>
 		<properties>

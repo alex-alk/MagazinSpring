@@ -68,18 +68,16 @@ header>ul{
 	float: left;
 	margin-right: -15px;
 }
-#asideRight{
+#asideLeft{
 	float: left;
-	margin-top: 20px;
-	clear: right;
 	background-color: rgba(100,150,100,0.5);
 	border-radius: 5px;
 	padding: 5px;
 }
-#asideRight label{
+#asideLeft label{
 	margin-left: 5px;
 }
-#asideRight label:hover{
+#asideLeft label:hover{
 	cursor: pointer;
 	opacity: 0.8;
 	transform: scale(1.05);
@@ -89,8 +87,8 @@ header>ul{
 	border-style: double;
 	border-color: #255625;
 	box-shadow: 5px 5px 5px #888888;
-	margin-left: 100px;
 	padding: 0;
+	margin-left: 100px;
 }
 #login{
 	border-width: 3px;
@@ -101,7 +99,7 @@ header>ul{
 	width: 300px;
 	margin: 0 auto;
 	text-align: center;
-	margin-top: 20%;
+	margin-top: 1%;
 }
 #login button{
 	margin-top: 10px;
@@ -152,4 +150,10 @@ header>ul{
 }
 #main tr:nth-child(1) td{
 	height: 161px;
+}
+#cauta{
+	 margin-left: 100px;
+}
+#cauta input{
+	background-color: #c6e9c6;
 }
