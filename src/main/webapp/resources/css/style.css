@@ -90,7 +90,7 @@ header>ul{
 	border-color: #255625;
 	box-shadow: 5px 5px 5px #888888;
 	margin-left: 100px;
-	padding: 5px;
+	padding: 0;
 }
 #login{
 	border-width: 3px;
@@ -126,4 +126,30 @@ header>ul{
 	width: 10em;
 	margin-top: 7px;
 	border-radius: 3px;
+}
+#main table{
+	border-collapse: collapse;
+	box-shadow: 5px 5px 5px #888888;
+	transition: 0.3s;
+	margin: 16px;
+	display: inline-block;
+}
+#main table:hover{
+	transform: scale(1.02);
+	cursor: pointer;
+}
+#main table, th, td{
+	border: 1px solid green;
+	padding: 0;
+}
+#main td{
+	width: 160px;
+	text-align: center;
+}
+#main tr:nth-child(2) td{
+	padding: 3px;
+	height: 4em;
+}
+#main tr:nth-child(1) td{
+	height: 161px;
 }

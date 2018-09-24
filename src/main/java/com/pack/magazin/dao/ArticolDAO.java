@@ -15,13 +15,27 @@ import com.pack.magazin.factory.JPAEntityFactoryBean;
 public class ArticolDAO {
 	@Autowired
 	JPAEntityFactoryBean entityFactoryBean;
+	@Autowired
+	Articol articol;
 	
 	public List<Articol> getArticole(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
 		TypedQuery<Articol> articolQuery = em.createNamedQuery("Articol.findAll", Articol.class);
+		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		List<Articol> articole = articolQuery.getResultList();
+		em.close();
+		return articole;
+	}
+	public Articol getArticolById(int id){
+		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		
+		TypedQuery<Articol> articolQuery = em.createNamedQuery("Articol.findById", Articol.class);
+		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
+		articolQuery.setParameter("id", id);
+		Articol articole = articolQuery.getSingleResult();
 		em.close();
 		return articole;
 	}

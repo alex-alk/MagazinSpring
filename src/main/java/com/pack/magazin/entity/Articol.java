@@ -12,7 +12,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Entity
-@NamedQuery(name="Articol.findAll", query="SELECT a FROM Articol a")
+@NamedQueries({
+	@NamedQuery(name="Articol.findAll", query="SELECT a FROM Articol a"),
+	@NamedQuery(name="Articol.findById", query = "SELECT a FROM Articol a WHERE a.id=:id")
+})
 public class Articol implements Serializable {
 	private static final long serialVersionUID = 1L;
 

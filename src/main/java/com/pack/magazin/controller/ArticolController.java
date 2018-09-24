@@ -21,15 +21,24 @@ public class ArticolController {
 	Articol articol;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
-		public String home(ArticolDAO articolDao, Model model) {
-			model.addAttribute("articole",articolDAO);
-			return "index";
-		}
-	@RequestMapping(value="admin/optiuni/adauga",method = RequestMethod.GET)
-	   public String articolUploadSet(Model model, ArticolUpload articolUpload) {//@Autowired
-		 model.addAttribute("articolUpload", articolUpload); 	
-	     return "admin/optiuni/adauga";
+	public String home(Model model) {
+		model.addAttribute("articole",articolDAO.getArticole());
+		return "index";
 	}
+	
+	@RequestMapping(value="descriere", method = RequestMethod.GET)
+	public String descriere(Model model, @RequestParam("id") String idstr) {
+		int id = Integer.parseInt(idstr);
+		model.addAttribute("articol",articolDAO.getArticolById(id));
+		return "descriere";
+	}
+	
+	@RequestMapping(value="admin/optiuni/adauga",method = RequestMethod.GET)
+    public String articolUploadSet(Model model, ArticolUpload articolUpload) {//@Autowired
+		model.addAttribute("articolUpload", articolUpload); 	
+		return "admin/optiuni/adauga";
+	}
+	
     @RequestMapping(value="admin/optiuni/articolUpload",method = RequestMethod.POST)
     public String articolUpload(Model model, @ModelAttribute("articolUpload")ArticolUpload articolUpload) throws IOException {
     	MultipartFile file = articolUpload.getFile();

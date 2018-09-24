@@ -30,39 +30,8 @@
     	<img id="headerImg" src="/resources/img/header.png">
     	<h1>Magazin acvaristică</h1>
     </header>
-    <aside id="asideRight">
-    	<form action="" method="GET">
-    		<p>Categorii:</p>
-    		<input type="checkbox" id="pesti"><label for="pesti">Pești</label><br>
-    		<input type="checkbox" id="hrana"><label for="hrana">Hrană</label><br>
-    		<input type="checkbox" id="acc"><label for="acc">Accesorii</label><br>
-    		<input type="checkbox" id="acv"><label for="acv">Acvarii</label><br>
-    		<p>Sortare:</p>
-    		<input type="checkbox" id="den"><label for="den">Denumire</label><br>
-    		<input type="checkbox" id="pret"><label for="pret">Preț</label><br>
-    	</form>
-    </aside>
-   	<form action="" method="GET">
-   		<button type="submit">Caută:</button>
-   		<input type="text">
-   	</form>
-    <div id=main>
-    <article>
-    	<c:forEach items="${articole}" var="articol">
-	    	<table>
-	    		<tr>
-	    			<td><img src="${articol.imagineURL}"></td>
-	    		</tr>
-	    		<tr>
-	    			<td>${articol.nume}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>Preț: ${articol.pret} lei<a href="descriere?id=${articol.id}">AAAA</a>a></td>
-	    			
-	    		</tr>
-	    	</table>
-    	</c:forEach>
-	</article>
-    </div>
-    </body>
+	<body>
+	<div id=main></div>
+		${articol.nume}
+	</body>
 </html>
