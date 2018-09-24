@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-		<a href="index.jsp">Pagina de start</a>
+		<a href="/">Pagina de start</a>
 		<form:form action="articolUpload" method="POST" enctype="multipart/form-data" modelAttribute="articolUpload">
 			<table>
 				<tr>

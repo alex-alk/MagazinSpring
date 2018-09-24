@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.pack.magazin.dao.ArticolDAO;
-import com.pack.magazin.entity.Articol;
+import com.pack.magazin.entity.Articole;
 import com.pack.magazin.model.ArticolUpload;
 import com.pack.magazin.model.MainQuery;
 
@@ -19,7 +19,7 @@ public class ArticolController {
 	@Autowired
 	private ArticolDAO articolDAO;
 	@Autowired
-	private Articol articol;
+	private Articole articol;
 	@Autowired
 	private MainQuery mainQuery;
 	
@@ -32,7 +32,17 @@ public class ArticolController {
 	
 	@RequestMapping(value="cauta", method = RequestMethod.GET)
 	public String cauta(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery) {
-		model.addAttribute("articole",articolDAO.getArticoleByQueryModel(mainQuery));
+		if(mainQuery.nothingSelected()) {
+			if(mainQuery.isOrderSelected()) {
+				model.addAttribute("articole", articolDAO.getArticoleByOrder(mainQuery));
+				System.out.println("order");
+				return "index";
+			}
+			model.addAttribute("articole",articolDAO.getArticole());
+			return "redirect:/";
+		}else {
+			model.addAttribute("articole",articolDAO.getArticoleByQueryModel(mainQuery));
+		}
 		return "index";
 	}
 	
@@ -59,7 +69,7 @@ public class ArticolController {
     	if (!file.getOriginalFilename().isEmpty()) {
 			String fullFileName = file.getOriginalFilename();
 		 	String fileName = fullFileName.substring(fullFileName.lastIndexOf("\\")+1, fullFileName.length());   	  
-		 	final File folder = new File("E:/mytemp");
+		 	final File folder = new File("E:\\Projects\\Eclipse EE workspace\\MagazinSpring\\src\\main\\webapp\\resources\\uploads");
 		 	for (final File fileEntry : folder.listFiles()) {
 			  if(fileEntry.getName().equals(fileName)) {
 			     model.addAttribute("msg", "Fișierul există deja");
@@ -68,12 +78,12 @@ public class ArticolController {
 		 	}
 		   	articol.setCategorie(articolUpload.getCategorie());
 		   	articol.setDescriere(articolUpload.getDescriere());
-		   	articol.setImagineURL("E:\\mytemp\\" + fileName);
+		   	articol.setImagineURL("resources/uploads/" + fileName);
 		   	articol.setNume(articolUpload.getNume());
 		   	articol.setPret(articolUpload.getPret());
 		   	articolDAO.addArticol(articol);
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-	                     						             new File("E:/mytemp", fileName)));
+	                     						             new File("E:\\Projects\\Eclipse EE workspace\\MagazinSpring\\src\\main\\webapp\\resources\\uploads", fileName)));
 	        outputStream.write(file.getBytes());
 	        outputStream.flush();
 	        outputStream.close();

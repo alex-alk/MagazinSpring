@@ -13,10 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Articol.findAll", query="SELECT a FROM Articol a"),
-	@NamedQuery(name="Articol.findById", query = "SELECT a FROM Articol a WHERE a.id=:id")
+	@NamedQuery(name="Articole.findAll", query="SELECT a FROM Articole a"),
+	@NamedQuery(name="Articole.findById", query = "SELECT a FROM Articole a WHERE a.id=:id"),
+	@NamedQuery(name="Articole.findByQuery", query = "SELECT a FROM Articole a "
+			+ "WHERE (a.categorie=:pesti OR a.categorie=:hrana OR a.categorie=:accesorii OR a.categorie=:acvarii)")
 })
-public class Articol implements Serializable {
+public class Articole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String categorie;
@@ -33,7 +35,7 @@ public class Articol implements Serializable {
 
 	private int pret;
 
-	public Articol() {
+	public Articole() {
 	}
 
 	public String getCategorie() {

@@ -9,9 +9,8 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="clienti")
-@NamedQuery(name="Client.findAll", query="SELECT c FROM Client c")
-public class Client implements Serializable {
+@NamedQuery(name="Clienti.findAll", query="SELECT c FROM Clienti c")
+public class Clienti implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String email;
@@ -27,7 +26,7 @@ public class Client implements Serializable {
 
 	private String telefon;
 
-	public Client() {
+	public Clienti() {
 	}
 
 	public String getEmail() {

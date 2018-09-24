@@ -9,8 +9,7 @@ public class MainQuery {
 	private String hrana;
 	private String accesorii;
 	private String acv;
-	private String den;
-	private String pret;
+	private String order;
 	public String getText() {
 		return text;
 	}
@@ -35,22 +34,25 @@ public class MainQuery {
 	public void setAcv(String acv) {
 		this.acv = acv;
 	}
-	public String getDen() {
-		return den;
-	}
-	public void setDen(String den) {
-		this.den = den;
-	}
-	public String getPret() {
-		return pret;
-	}
-	public void setPret(String pret) {
-		this.pret = pret;
-	}
 	public String getPesti() {
 		return pesti;
 	}
 	public void setPesti(String pesti) {
 		this.pesti = pesti;
+	}
+	public boolean nothingSelected() {
+		if(pesti==null&&hrana==null&&acv==null&&accesorii==null)return true;return false;
+	}
+	public String orderBy() {
+		if(order=="pret")return "pret"; return" nume";
+	}
+	public boolean isOrderSelected() {
+		if(order==null)return false; return true;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
 	}
 }

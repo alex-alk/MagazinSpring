@@ -37,13 +37,13 @@
 	   		</div>
 	   		<aside id="asideLeft">
 	    		<p>Categorii:</p>
-	    		<form:checkbox path="pesti" value="pesti" onclick="form.submit()"/><label for="pesti" >Pești</label><br>
-	    		<form:checkbox path="hrana" value="hrana" onclick="form.submit()"/><label for="hrana" >Hrană</label><br>
-	    		<form:checkbox path="accesorii" value="accesorii" onclick="form.submit()"/><label for="acc">Accesorii</label><br>
-	    		<form:checkbox path="acv" value="acv" onclick="form.submit()"/><label for="acv">Acvarii</label><br>
+	    		<form:checkbox path="pesti" value="pesti" id="pesti" onclick="form.submit()"/><label for="pesti" >Pești</label><br>
+	    		<form:checkbox path="hrana" value="hrana" id="hrana" onclick="form.submit()"/><label for="hrana" >Hrană</label><br>
+	    		<form:checkbox path="accesorii" value="accesorii" id="acc" onclick="form.submit()"/><label for="acc">Accesorii</label><br>
+	    		<form:checkbox path="acv" value="acv" id="acv" onclick="form.submit()"/><label for="acv">Acvarii</label><br>
 	    		<p>Sortare:</p>
-	    		<form:checkbox path="den" value="den" onclick="form.submit()"/><label for="den">Denumire</label><br>
-	    		<form:checkbox path="pret" value="pret" onclick="form.submit()"/><label for="pret">Preț</label><br>
+	    		<form:radiobutton path="order" value="nume" id="den" onclick="form.submit()"/><label for="den">Denumire</label><br>
+	    		<form:radiobutton path="order" value="pret" id="pret" onclick="form.submit()"/><label for="pret">Preț</label><br>
     		</aside>
     	</form:form>
     <div id=main>

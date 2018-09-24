@@ -16,7 +16,7 @@
     </head>
     <body>
 	<ul id="opt">
-		<li><a href=adauga.jsp>Adaugă articole</a></li>
+		<li><a href="optiuni/adauga">Adaugă articole</a></li>
 	</ul>
 	</body>
 </html>

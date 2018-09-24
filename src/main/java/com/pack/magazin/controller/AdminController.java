@@ -12,8 +12,12 @@ public class AdminController {
 	@Autowired
 	AdminDAO adminDAO;
 	
-	@RequestMapping(value="admin", method=RequestMethod.POST)
+	@RequestMapping(value="admin/optiuni", method=RequestMethod.POST)
 	public String getAdmins(Model model) {
+		return "admin/optiuni/index";
+	}
+	@RequestMapping(value="admin/optiuni", method=RequestMethod.GET)
+	public String getAdminsGET(Model model) {
 		return "admin/optiuni/index";
 	}
 	@RequestMapping(value="admin", method=RequestMethod.GET)
