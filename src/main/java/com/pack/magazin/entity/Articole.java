@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Articole.findAll", query="SELECT a FROM Articole a"),
-	@NamedQuery(name="Articole.findById", query = "SELECT a FROM Articole a WHERE a.id=:id"),
-	@NamedQuery(name="Articole.findByQuery", query = "SELECT a FROM Articole a "
-			+ "WHERE (a.categorie=:pesti OR a.categorie=:hrana OR a.categorie=:accesorii OR a.categorie=:acvarii)")
+	@NamedQuery(name="Articole.findById", query = "SELECT a FROM Articole a WHERE a.id=:id")
 })
 public class Articole implements Serializable {
 	private static final long serialVersionUID = 1L;

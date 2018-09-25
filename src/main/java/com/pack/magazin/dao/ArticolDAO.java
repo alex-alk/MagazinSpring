@@ -42,28 +42,27 @@ public class ArticolDAO {
 		em.close();
 		return articole;
 	}
-	public List<Articole> getArticoleByQueryModel(MainQuery mainQuery){
-		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
-		EntityManager em = emf.createEntityManager();
-		
-		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findByQuery", Articole.class);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
-		articolQuery.setParameter("pesti", mainQuery.getPesti());
-		articolQuery.setParameter("hrana", mainQuery.getHrana());
-		articolQuery.setParameter("accesorii", mainQuery.getAccesorii());
-		articolQuery.setParameter("acvarii", mainQuery.getAcv());
-		List<Articole> articole = articolQuery.getResultList();
-		em.close();
-		return articole;
-	}
-	public List<Articole> getArticoleByOrder(MainQuery mainQuery){
+	public List<Articole> getArticoleByMainQuery(MainQuery mainQuery){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 			
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Articole> q = cb.createQuery(Articole.class);
 		Root<Articole> c = q.from(Articole.class);
-		q.select(c).orderBy(cb.asc(c.get(mainQuery.getOrder())));
+		
+		if(mainQuery.nothingSelected()){
+			q.select(c).orderBy(cb.asc(c.get(mainQuery.orderBy())));
+		}else {
+			q.select(c).where(
+					cb.or(
+							cb.equal(c.get("categorie"), mainQuery.getPesti()),
+							cb.equal(c.get("categorie"), mainQuery.getHrana()),
+							cb.equal(c.get("categorie"), mainQuery.getAcv()),
+							cb.equal(c.get("categorie"), mainQuery.getAccesorii())
+						 )
+			).orderBy(cb.asc(c.get(mainQuery.orderBy())));
+		}
+		
 		TypedQuery<Articole> articolQuery = em.createQuery(q);
 		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		List<Articole> articole = articolQuery.getResultList();

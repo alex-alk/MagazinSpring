@@ -32,17 +32,7 @@ public class ArticolController {
 	
 	@RequestMapping(value="cauta", method = RequestMethod.GET)
 	public String cauta(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery) {
-		if(mainQuery.nothingSelected()) {
-			if(mainQuery.isOrderSelected()) {
-				model.addAttribute("articole", articolDAO.getArticoleByOrder(mainQuery));
-				System.out.println("order");
-				return "index";
-			}
-			model.addAttribute("articole",articolDAO.getArticole());
-			return "redirect:/";
-		}else {
-			model.addAttribute("articole",articolDAO.getArticoleByQueryModel(mainQuery));
-		}
+		model.addAttribute("articole", articolDAO.getArticoleByMainQuery(mainQuery));
 		return "index";
 	}
 	

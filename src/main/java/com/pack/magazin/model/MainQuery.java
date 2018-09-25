@@ -44,7 +44,9 @@ public class MainQuery {
 		if(pesti==null&&hrana==null&&acv==null&&accesorii==null)return true;return false;
 	}
 	public String orderBy() {
-		if(order=="pret")return "pret"; return" nume";
+		if(order.equals("pret"))return "pret";
+		else if(order.equals("nume"))return "nume";
+		else return "id";
 	}
 	public boolean isOrderSelected() {
 		if(order==null)return false; return true;
