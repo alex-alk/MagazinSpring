@@ -157,3 +157,30 @@ header>ul{
 #cauta input{
 	background-color: #c6e9c6;
 }
+.startStyle{
+	list-style-type: none;
+	text-align: center;
+}
+.startStyle a{
+	display: block;
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 10em;
+	margin-top: 7px;
+	border-radius: 3px;
+}
+.button{
+	display:block;
+	color:white;
+	padding: 4px;
+	width: 128px;
+	margin: 16px;
+	background-color: green;
+	color: white;
+	border: 2px solid;
+	border-left-color: white;
+	border-top-color: white;
+	border-right-color: gray;
+	border-bottom-color: gray;
+}

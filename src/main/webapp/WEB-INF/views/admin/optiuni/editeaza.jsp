@@ -17,36 +17,37 @@
     </head>
     <body>
 		<a href="/">Pagina de start</a>
-		<form:form action="/admin/optiuni/articolUpload" method="POST" enctype="multipart/form-data" modelAttribute="articolUpload">
+		<form:form action="/admin/optiuni/editeaza" method="POST" enctype="multipart/form-data" modelAttribute="articolUpload">
 			<table>
 				<tr>
 					<td>  
 						<form:input type="file" path="file"/><br>
-						<p>Dim: 160px X 160px</p>
+						<p>Dimensiuni: 160px X 160px</p>
+						<img src="${articol.imagineURL}">
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Denumire:</p>
-						<form:input path="nume"/>
-						<form:hidden path="id" value="0"/>
+						<form:input path="nume" value="${articol.nume}"/>
+						<form:hidden path="id" value="${articol.id}"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Preț:</p>
-						<form:input path="pretStr"/>
+						<form:input path="pretStr" value="${articol.pret}"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Categorie:</p>
-						<form:input path="categorie"/>
+						<form:input path="categorie" value="${articol.categorie}"/>
 					</td>
 				</tr>
 			</table>
-			<form:input path="descriere"></form:input>
-			<button type="submit">Adaugă</button>
+			<form:input path="descriere" value="${articol.descriere}"/>
+			<button type="submit">Editează</button>
 		</form:form>
 		<p>${msg}</p>
 	</body>

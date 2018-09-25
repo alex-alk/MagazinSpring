@@ -19,24 +19,25 @@ import com.pack.magazin.model.MainQuery;
 @Component
 public class ArticolDAO {
 	@Autowired
-	private JPAEntityFactoryBean entityFactoryBean;
+	JPAEntityFactoryBean entityFactoryBean;
 	
 	public List<Articole> getArticole(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
 		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findAll", Articole.class);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
+		//articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		List<Articole> articole = articolQuery.getResultList();
 		em.close();
 		return articole;
 	}
-	public Articole getArticolById(int id){
+	public Articole getArticolById(String idstr){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
 		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findById", Articole.class);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
+		//articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
+		int id = Integer.parseInt(idstr);
 		articolQuery.setParameter("id", id);
 		Articole articole = articolQuery.getSingleResult();
 		em.close();
@@ -64,7 +65,7 @@ public class ArticolDAO {
 		}
 		
 		TypedQuery<Articole> articolQuery = em.createQuery(q);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
+		//articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		List<Articole> articole = articolQuery.getResultList();
 		em.close();
 		return articole;
@@ -75,6 +76,14 @@ public class ArticolDAO {
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
 		em.persist(articol);
+		txn.commit();				
+	}
+	public void updateArticol (Articole articol) {
+		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction txn = em.getTransaction();
+		txn.begin();
+		em.merge(articol);
 		txn.commit();
 	}
 }

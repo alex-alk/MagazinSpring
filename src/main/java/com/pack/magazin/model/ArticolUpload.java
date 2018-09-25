@@ -11,6 +11,7 @@ public class ArticolUpload {
 	private String categorie;
 	private String descriere;
 	private int pret;
+	private String id;
 
 	public MultipartFile getFile() {
 		return file;
@@ -61,5 +62,11 @@ public class ArticolUpload {
 		}catch(Exception e) {
 			return true;
 		}
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }
