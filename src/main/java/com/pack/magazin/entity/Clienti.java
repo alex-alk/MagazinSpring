@@ -9,7 +9,11 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Clienti.findAll", query="SELECT c FROM Clienti c")
+@NamedQueries({
+	@NamedQuery(name="Clienti.findAll", query="SELECT c FROM Clienti c"),
+	@NamedQuery(name="AClienti.findByEmail", query = "SELECT c FROM Clienti c WHERE c.email=:email")
+})
+
 public class Clienti implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,6 +31,12 @@ public class Clienti implements Serializable {
 	private String telefon;
 
 	public Clienti() {
+		id = 0;
+		email = "";
+		nume = "";
+		parola = "";
+		prenume = "";
+		telefon = "";
 	}
 
 	public String getEmail() {

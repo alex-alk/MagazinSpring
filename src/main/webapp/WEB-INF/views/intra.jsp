@@ -8,7 +8,7 @@
         <title>Magazin acvaristică</title>
         <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/css/style.css">
-        <link rel="shortcut icon" href="fav.ico">
+        <link rel="shortcut icon" href="/resources/img/fav.ico">
         <script src="/resources/js/jquery-3.3.1.min.js"></script>
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
@@ -18,8 +18,8 @@
     <header>
     	<ul>
     		<li><a href="/">Pagina de start</a></li>
-    		<li><a href="inregistrare">Înregistrare</a></li>
-    		<li><a href="index.jsp">Intră în cont</a></li>
+    		<li><a href="/inregistrare">Înregistrare</a></li>
+    		<li><a href="/intra">Intră în cont</a></li>
     	</ul>
     	<ul id=headerRight>
     		<li><a href="index.jsp"><img id="cos" src="/resources/img/cos.png">Vizualizare comandă</a></li>
@@ -28,9 +28,18 @@
     	<img id="headerImg" src="/resources/img/header.png">
     	<h1>Magazin acvaristică</h1>
     </header>
-    <body>
-    	<div id="main">
-    		<h3>Înregistrat cu succes</h3>
-    	</div>
+    <body><%--incearca si fara hidden --%>
+    	<form:form action="intra" id="login" method="POST" modelAttribute="client">
+	    	<form:hidden path="nume" value=""/><br>
+    		<form:hidden path="prenume" value=""/><br>
+    		<form:hidden path="telefon" value=""/><br>
+    		<label>Adresa email</label>
+    		<form:input path="email"/><br>
+    		<label>Parola:</label><br>
+    		<form:input path="parola"/><br>
+    		<button type="submit">Întră în cont</button><br>
+    		<button type="submit">Recuperare parolă</button>
+    	</form:form>
+    	<p></p>
     </body>
 </html>

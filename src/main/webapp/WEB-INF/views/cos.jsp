@@ -7,12 +7,11 @@
         <title>Magazin acvaristică</title>
         <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/css/style.css">
-        <link rel="shortcut icon" href="fav.ico">
+        <link rel="shortcut icon" href="/resources/img/fav.ico">
         <script src="/resources/js/jquery-3.3.1.min.js"></script>
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
         <script src="/resources/js/script"></script>
-        <meta name="description" content="EL cu denumirea">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>

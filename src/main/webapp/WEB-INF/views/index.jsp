@@ -20,7 +20,7 @@
     <header>
     	<ul>
     		<li><a href="/">Pagina de start</a></li>
-    		<li><a href="inregistrare">Înregistrare</a></li>
+    		<li><a href="/inregistrare">Înregistrare</a></li>
     		<li><a href="index.jsp">Intră în cont</a></li>
     	</ul>
     	<ul id=headerRight>

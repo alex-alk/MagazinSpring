@@ -11,11 +11,38 @@ import com.pack.magazin.entity.Clienti;
 public class ClientController {
 	@Autowired
 	ClientDAO clientDAO;
-	@RequestMapping(value="inregistrare", method = RequestMethod.GET)
-	public String getPage(Clienti client, Model model) {
-		model.addAttribute(client);
-		return "inregistrare";
+	
+	@RequestMapping(value="/inregistrare", method = RequestMethod.GET)
+	public String inregPage(Clienti client, Model model) {
+		model.addAttribute("client", client);
+		return "/inregistrare";
 	}
+	
+	@RequestMapping(value="/inregistrare",method = RequestMethod.POST)
+    public String inreg(Model model, @ModelAttribute("client")Clienti client) {
+    	if (client.isNotValid()) {
+			     model.addAttribute("msg", "Toate câmpurile sunt obligatorii");
+		         return "/inregistrare";
+		}
+		clientDAO.addClient(client);
+	    return "redirect:/";
+    }
+	
+	@RequestMapping(value="/intra", method = RequestMethod.GET)
+	public String intraPage(Clienti client, Model model) {
+		model.addAttribute("client", client);
+		return "/intra";
+	}
+	@RequestMapping(value="/intra",method = RequestMethod.POST)
+    public String intra(Model model, @ModelAttribute("client")Clienti client) {
+		Clienti clientBaza = clientDAO.getClientByEmail(client.getEmail());
+    	if (clientBaza.getParola().equals(client.getParola())) {
+		         return "redirect:/index";
+		}
+	    model.addAttribute("msg", "Înregistrat cu succes");
+	    return "/inregistrare";
+    }
+	
 	/*
 	@RequestMapping(value="descriere", method = RequestMethod.GET)
 	public String descriere(Model model, @RequestParam("id") String idstr) {
@@ -30,14 +57,5 @@ public class ClientController {
 		return "admin/optiuni/adauga";
 	}
 	*/
-    @RequestMapping(value="inregistrare",method = RequestMethod.POST)
-    public String articolUpload(Model model, @ModelAttribute("client")Clienti client) {
-    	if (client.isNotValid()) {
-			     model.addAttribute("msg", "Toate câmpurile sunt obligatorii");
-		         return "inregistrare";
-		}
-		clientDAO.addClient(client);
-	    model.addAttribute("msg", "Înregistrat cu succes");
-	    return "succes";
-    }
+    
 }

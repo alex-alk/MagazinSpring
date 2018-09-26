@@ -13,14 +13,13 @@
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
         <script src="/resources/js/script"></script>
-        <meta name="description" content="Magazin online cu pești de acvariu, hrană, accesorii și acvarii.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <header>
     	<ul>
     		<li><a href="/">Pagina de start</a></li>
-    		<li><a href="inregistrare">Înregistrare</a></li>
-    		<li><a href="index.jsp">Intră în cont</a></li>
+    		<li><a href="/inregistrare">Înregistrare</a></li>
+    		<li><a href="/index.jsp">Intră în cont</a></li>
     	</ul>
     	<ul id=headerRight>
     		<li><a href="index.jsp"><img id="cos" src="/resources/img/cos.png">Vizualizare comandă</a></li>

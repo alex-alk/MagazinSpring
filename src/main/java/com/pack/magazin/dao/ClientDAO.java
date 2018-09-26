@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import com.pack.magazin.entity.Articole;
 import com.pack.magazin.entity.Clienti;
 import com.pack.magazin.factory.JPAEntityFactoryBean;
 
@@ -17,27 +16,37 @@ public class ClientDAO {
 	@Autowired
 	JPAEntityFactoryBean entityFactoryBean;
 	
-	public List<Articole> getClienti(){
+	public List<Clienti> getClienti(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articol.findAll", Articole.class);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
-		List<Articole> articole = articolQuery.getResultList();
+		TypedQuery<Clienti> query = em.createNamedQuery("Clienti.findAll", Clienti.class);
+		List<Clienti> Clienti = query.getResultList();
 		em.close();
-		return articole;
+		return Clienti;
 	}
-	public Articole getArticolById(int id){
+	public Clienti getClientByEmail(String email){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articol.findById", Articole.class);
+		TypedQuery<Clienti> query = em.createNamedQuery("Clienti.findById", Clienti.class);
+		query.setParameter("email", email);
+		Clienti Clienti = query.getSingleResult();
+		em.close();
+		return Clienti;
+	}
+	/*
+	public Clienti getClientById(int id){
+		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		
+		TypedQuery<Clienti> articolQuery = em.createNamedQuery("Articol.findById", Clienti.class);
 		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		articolQuery.setParameter("id", id);
-		Articole articole = articolQuery.getSingleResult();
+		Clienti Clienti = articolQuery.getSingleResult();
 		em.close();
-		return articole;
-	}
+		return Clienti;
+	}*/
 	public void addClient (Clienti client) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
