@@ -26,7 +26,6 @@ public class ArticolDAO {
 		EntityManager em = emf.createEntityManager();
 		
 		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findAll", Articole.class);
-		//articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		List<Articole> articole = articolQuery.getResultList();
 		em.close();
 		return articole;
@@ -36,7 +35,6 @@ public class ArticolDAO {
 		EntityManager em = emf.createEntityManager();
 		
 		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findById", Articole.class);
-		//articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		int id = Integer.parseInt(idstr);
 		articolQuery.setParameter("id", id);
 		Articole articole = articolQuery.getSingleResult();
@@ -65,7 +63,6 @@ public class ArticolDAO {
 		}
 		
 		TypedQuery<Articole> articolQuery = em.createQuery(q);
-		//articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
 		List<Articole> articole = articolQuery.getResultList();
 		em.close();
 		return articole;
@@ -84,6 +81,15 @@ public class ArticolDAO {
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
 		em.merge(articol);
+		txn.commit();
+	}
+	public void deleteArticol (int id) {
+		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction txn = em.getTransaction();
+		txn.begin();
+		Articole articol = em.find(Articole.class, id);
+		em.remove(articol);
 		txn.commit();
 	}
 }

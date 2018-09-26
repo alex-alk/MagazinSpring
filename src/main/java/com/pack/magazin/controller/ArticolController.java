@@ -136,4 +136,33 @@ public class ArticolController {
      return "/admin/optiuni/adauga";
     }
     //end add article
+    
+    //delete article
+    @RequestMapping(value="/admin/optiuni/stergere",method = RequestMethod.GET)
+    public String deleteArticlePage(Model model) {
+    	model.addAttribute("articole",articolDAO.getArticole());
+		model.addAttribute("mainQuery", mainQuery);	
+		return "/admin/optiuni/stergere";
+	}
+    @RequestMapping(value="/admin/optiuni/stergere/cauta",method = RequestMethod.GET)
+    public String deleteArticlePageSearch(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery){
+    	model.addAttribute("articole", articolDAO.getArticoleByMainQuery(mainQuery));
+		model.addAttribute("mainQuery", mainQuery);	
+		return "/admin/optiuni/stergere";
+	}
+    //adaugare cauta si la edit
+    
+	@RequestMapping(value="/admin/optiuni/sterge",method = RequestMethod.POST)
+    public String deleteArticle(Model model, @RequestParam("id")String idStr) throws IOException {
+		model.addAttribute("mainQuery", mainQuery);
+		Articole articol = articolDAO.getArticolById(idStr);
+	 	String fileURL = "E:\\Projects\\Eclipse EE workspace\\MagazinSpring\\src\\main\\webapp" + articol.getImagineURL();
+	 	File file = new File(fileURL);
+	 	System.out.println(fileURL);
+	   	file.delete();
+	   	int id = Integer.parseInt(idStr);
+        articolDAO.deleteArticol(id);
+        model.addAttribute("articole",articolDAO.getArticole());
+     return "redirect:/admin/optiuni/stergere";
+    }
 }

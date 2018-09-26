@@ -15,12 +15,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-	<ul id="opt">
-		<li><a href="/admin/optiuni/adauga">Adaugă articole</a></li>
-		<li><a href="/admin/optiuni/editare">Editare articole</a></li>
-		<li><a href="/admin/optiuni/sterge">Șterge articole</a></li>
-		<li><a href="/admin/optiuni/comenzi">Vizualizare comenzi</a></li>
-		<li><a href="/admin/optiuni/oferte">Oferte și promoții</a></li>
-	</ul>
+		<ul id="opt">
+			<li><a href="/admin/optiuni/adauga">Adaugă articole</a></li>
+			<li><a href="/admin/optiuni/editare">Editare articole</a></li>
+			<li><a href="/admin/optiuni/stergere">Șterge articole</a></li>
+			<li><a href="/admin/optiuni/comenzi">Vizualizare comenzi</a></li>
+			<li><a href="/admin/optiuni/oferte">Oferte și promoții</a></li>
+		</ul>
 	</body>
 </html>
