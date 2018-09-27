@@ -31,11 +31,19 @@
 	<body>
 		<div id=main>
 			<article>
-				<p>Preț: ${articol.pret}</p>
-				<h3>${articol.nume}</h3>
-				<img src="${articol.imagineURL}">
-				<p>${articol.descriere}</p>
+				<c:forEach var ="id" items="${cookie}">
+					<c:if test='${id.value.value=="id"}'>
+						${id.value.name}
+						<form action="/stergeDinCos" method="POST">
+							<input type="hidden" name="id" value='${id.value.name}'>
+							<button type="submit">Elimină din coș</button>
+						</form><br>
+					</c:if>	
+				</c:forEach>
 			</article>
 		</div>
+		<form action="/validareComanda" method="POST">
+			<button type="submit">Validare comandă</button>
+		</form>
 	</body>
 </html>

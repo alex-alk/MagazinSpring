@@ -8,7 +8,7 @@
         <title>Magazin acvaristică</title>
         <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/css/style.css">
-        <link rel="shortcut icon" href="fav.ico">
+        <link rel="shortcut icon" href="/resources/img/fav.ico">
         <script src="/resources/js/jquery-3.3.1.min.js"></script>
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
@@ -21,10 +21,17 @@
     	<ul>
     		<li><a href="/">Pagina de start</a></li>
     		<li><a href="/inregistrare">Înregistrare</a></li>
-    		<li><a href="index.jsp">Intră în cont</a></li>
+    		<c:choose>
+    			<c:when test="${nume!= 'none'}">
+    				<li><a href="/intra">Utilizator: ${nume}</a>
+    			</c:when>
+    			<c:otherwise>
+    				<li><a href="/intra">Intră în cont</a></li>
+    			</c:otherwise>
+    		</c:choose>
     	</ul>
     	<ul id=headerRight>
-    		<li><a href="index.jsp"><img id="cos" src="/resources/img/cos.png">Vizualizare comandă</a></li>
+    		<li><a href="/cos"><img id="cos" src="/resources/img/cos.png">Vizualizare comandă</a></li>
     		<li><img id="call" src="/resources/img/call.png">Comenzi telefonice: <p>0740.000.000</p></li>
     	</ul>
     	<img id="headerImg" src="/resources/img/header.png">

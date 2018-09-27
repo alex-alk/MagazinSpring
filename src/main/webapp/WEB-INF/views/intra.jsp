@@ -29,7 +29,7 @@
     	<h1>Magazin acvaristică</h1>
     </header>
     <body><%--incearca si fara hidden --%>
-    	<form:form action="intra" id="login" method="POST" modelAttribute="client">
+    	<form:form action="/intra" id="login" method="POST" modelAttribute="client">
 	    	<form:hidden path="nume" value=""/><br>
     		<form:hidden path="prenume" value=""/><br>
     		<form:hidden path="telefon" value=""/><br>
@@ -37,6 +37,7 @@
     		<form:input path="email"/><br>
     		<label>Parola:</label><br>
     		<form:input path="parola"/><br>
+    		<p>${msg}</p>
     		<button type="submit">Întră în cont</button><br>
     		<button type="submit">Recuperare parolă</button>
     	</form:form>

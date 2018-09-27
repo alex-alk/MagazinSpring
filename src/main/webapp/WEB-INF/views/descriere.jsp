@@ -38,5 +38,9 @@
 				<p>${articol.descriere}</p>
 			</article>
 		</div>
+		<form action="/cos" method="POST">
+			<input type="hidden" name="id" value="${articol.id}">
+			<button type="submit">Cumpăr</button>
+		</form>
 	</body>
 </html>

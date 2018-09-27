@@ -29,23 +29,26 @@ public class ClientDAO {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Clienti> query = em.createNamedQuery("Clienti.findById", Clienti.class);
+		TypedQuery<Clienti> query = em.createNamedQuery("Clienti.findByEmail", Clienti.class);
 		query.setParameter("email", email);
-		Clienti Clienti = query.getSingleResult();
+		Clienti client;
+		try {
+			client = query.getSingleResult();
+		}catch(Exception e){
+			client = new Clienti();
+		}
 		em.close();
-		return Clienti;
-	}
-	/*
+		return client;
+	}/*
 	public Clienti getClientById(int id){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Clienti> articolQuery = em.createNamedQuery("Articol.findById", Clienti.class);
-		articolQuery.setHint("javax.persistence.cache.storeMode", "REFRESH");//development only
-		articolQuery.setParameter("id", id);
-		Clienti Clienti = articolQuery.getSingleResult();
+		TypedQuery<Clienti> query = em.createNamedQuery("Clienti.findById", Clienti.class);
+		query.setParameter("id", id);
+		Clienti client = query.getSingleResult();
 		em.close();
-		return Clienti;
+		return client;
 	}*/
 	public void addClient (Clienti client) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();

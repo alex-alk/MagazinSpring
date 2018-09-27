@@ -1,5 +1,9 @@
 package com.pack.magazin.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -34,13 +38,50 @@ public class ClientController {
 		return "/intra";
 	}
 	@RequestMapping(value="/intra",method = RequestMethod.POST)
-    public String intra(Model model, @ModelAttribute("client")Clienti client) {
+    public String intra(Model model, @ModelAttribute("client")Clienti client, HttpServletResponse response) {
 		Clienti clientBaza = clientDAO.getClientByEmail(client.getEmail());
     	if (clientBaza.getParola().equals(client.getParola())) {
-		         return "redirect:/index";
+    		Cookie cookie = new Cookie("nume", clientBaza.getNume());
+    		cookie.setMaxAge(600);
+    		response.addCookie(cookie);
+		    return "redirect:/";
 		}
-	    model.addAttribute("msg", "Înregistrat cu succes");
-	    return "/inregistrare";
+	    model.addAttribute("msg", "Adresa de email nu corespunde cu parola");
+	    return "/intra";
+    }
+	
+	@RequestMapping(value="/cos", method = RequestMethod.GET)
+	public String cosPageLink(Clienti client, Model model, HttpServletRequest request) {
+		model.addAttribute("client", client);
+		return "/cos";
+	} 
+	@RequestMapping(value="/cos", method = RequestMethod.POST)
+	public String cosPageFromDescription(Model model, @RequestParam("id")String id, HttpServletResponse response) {
+		Cookie cookie = new Cookie(id, "id");
+		cookie.setMaxAge(120);
+		response.addCookie(cookie);
+		return "redirect:/cos";
+	}
+	@RequestMapping(value="/stergeDinCos", method = RequestMethod.POST)
+	public String stergeDinCos(Model model, @RequestParam("id")String id, HttpServletResponse response) {
+		Cookie cookie = new Cookie(id, "id");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		return "redirect:/cos";
+	}
+	
+	/*
+	@RequestMapping(value="/cos",method = RequestMethod.POST)
+    public String toConform(Model model) {
+		Clienti clientBaza = clientDAO.getClientByEmail(client.getEmail());
+    	if (clientBaza.getParola().equals(client.getParola())) {
+    		Cookie cookie = new Cookie("nume", clientBaza.getNume());
+    		cookie.setMaxAge(60);
+    		response.addCookie(cookie);
+		    return "/confirm";
+		}
+	    model.addAttribute("msg", "Adresa de email nu corespunde cu parola");
+	    return "/intra";
     }
 	
 	/*

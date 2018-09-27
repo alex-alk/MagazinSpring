@@ -23,9 +23,10 @@ public class ArticolController {
 	
 	//home page
 	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model, @CookieValue(value="nume", defaultValue="none")String cookieValue) {
 		model.addAttribute("articole",articolDAO.getArticole());
 		model.addAttribute("mainQuery", mainQuery);
+		model.addAttribute("nume", cookieValue);
 		return "/index";
 	}
 	

@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Clienti.findAll", query="SELECT c FROM Clienti c"),
-	@NamedQuery(name="AClienti.findByEmail", query = "SELECT c FROM Clienti c WHERE c.email=:email")
+	@NamedQuery(name="Clienti.findByEmail", query = "SELECT c FROM Clienti c WHERE c.email=:email"),
+	@NamedQuery(name="Clienti.findById", query = "SELECT c FROM Clienti c WHERE c.id=:id")
 })
 
 public class Clienti implements Serializable {
