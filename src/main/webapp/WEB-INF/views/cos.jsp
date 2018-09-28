@@ -29,20 +29,18 @@
     	<h1>Magazin acvaristică</h1>
     </header>
 	<body>
-		<div id=main>
-			<article>
-				<c:forEach var ="id" items="${cookie}">
-					<c:if test='${id.value.value=="id"}'>
-						${id.value.name}
-						<form action="/stergeDinCos" method="POST">
-							<input type="hidden" name="id" value='${id.value.name}'>
-							<button type="submit">Elimină din coș</button>
-						</form><br>
-					</c:if>	
-				</c:forEach>
-			</article>
-		</div>
 		<form action="/validareComanda" method="POST">
+			<c:forEach var ="id" items="${cookie}">
+				<div id=main>
+					<article>			
+						<c:if test='${id.value.value=="id"}'>
+							<input type="number" name="${id.value.name}">id:${id.value.name}<p></p> 
+							<a href="/stergeDinCos?id=${id.value.name}">Elimină</a>
+						</c:if>			
+					</article>
+				</div>
+			</c:forEach>
+			${msg}	
 			<button type="submit">Validare comandă</button>
 		</form>
 	</body>

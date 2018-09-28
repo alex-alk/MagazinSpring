@@ -32,15 +32,15 @@
 	<body>
 		<div id=main>
 			<article>
-				<p>Preț: ${articol.pret}</p>
-				<h3>${articol.nume}</h3>
-				<img src="${articol.imagineURL}">
-				<p>${articol.descriere}</p>
+				<p>Preț: ${article.price}</p>
+				<h3>${article.name}</h3>
+				<img src="${article.imageURL}">
+				<p>${article.description}</p>
 			</article>
 		</div>
 		<form action="/cos" method="POST">
-			<input type="hidden" name="id" value="${articol.id}">
-			<button type="submit">Cumpăr</button>
+			<input type="hidden" name="id" value="${article.id}">
+			<button type="submit">Adaugă în coș</button>
 		</form>
 	</body>
 </html>

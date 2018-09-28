@@ -22,8 +22,8 @@
     		<li><a href="/">Pagina de start</a></li>
     		<li><a href="/inregistrare">Înregistrare</a></li>
     		<c:choose>
-    			<c:when test="${nume!= 'none'}">
-    				<li><a href="/intra">Utilizator: ${nume}</a>
+    			<c:when test="">
+    				<li><a href="/intra">Utilizator: </a>
     			</c:when>
     			<c:otherwise>
     				<li><a href="/intra">Intră în cont</a></li>
@@ -54,16 +54,16 @@
     		</aside>
     	</form:form>
     <div id=main>
-    	<c:forEach items="${articole}" var="articol">
+    	<c:forEach items="${articles}" var="article">
 	    	<table>
 	    		<tr>
-	    			<td><img src="${articol.imagineURL}"></td>
+	    			<td><img src="${article.imageURL}"></td>
 	    		</tr>
 	    		<tr>
-	    			<td>${articol.nume}</td>
+	    			<td>${article.name}</td>
 	    		</tr>
 	    		<tr>
-	    			<td>Preț: ${articol.pret} lei<a href="descriere?id=${articol.id}">AAAA</a>a></td>
+	    			<td>Preț: ${article.price} lei<a href="descriere?id=${article.id}">AAAA</a>a></td>
 	    		</tr>
 	    	</table>
     	</c:forEach>

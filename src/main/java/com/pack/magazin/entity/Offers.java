@@ -9,8 +9,8 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Oferte.findAll", query="SELECT o FROM Oferte o")
-public class Oferte implements Serializable {
+@NamedQuery(name="Offers.findAll", query="SELECT o FROM Offers o")
+public class Offers implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -18,7 +18,7 @@ public class Oferte implements Serializable {
 
 	private String url;
 
-	public Oferte() {
+	public Offers() {
 	}
 
 	public int getId() {

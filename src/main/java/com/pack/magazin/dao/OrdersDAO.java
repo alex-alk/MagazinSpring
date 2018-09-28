@@ -8,15 +8,16 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import com.pack.magazin.entity.Clienti;
+import com.pack.magazin.entity.Clients;
+import com.pack.magazin.entity.Orders;
 import com.pack.magazin.factory.JPAEntityFactoryBean;
 
 @Component
-public class ClientDAO {
+public class OrdersDAO {
 	@Autowired
 	JPAEntityFactoryBean entityFactoryBean;
-	
-	public List<Clienti> getClienti(){
+	/*
+	public List<Comenzi> getComenzi(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
@@ -50,12 +51,12 @@ public class ClientDAO {
 		em.close();
 		return client;
 	}*/
-	public void addClient (Clienti client) {
+	public void addOrder (Orders order) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
-		em.persist(client);
+		em.persist(order);
 		txn.commit();
 	}
 }

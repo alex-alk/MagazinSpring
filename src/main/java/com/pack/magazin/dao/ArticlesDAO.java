@@ -12,42 +12,42 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import com.pack.magazin.entity.Articole;
+import com.pack.magazin.entity.Articles;
 import com.pack.magazin.factory.JPAEntityFactoryBean;
 import com.pack.magazin.model.MainQuery;
 
 @Component
-public class ArticolDAO {
+public class ArticlesDAO {
 	@Autowired
 	JPAEntityFactoryBean entityFactoryBean;
 	
-	public List<Articole> getArticole(){
+	public List<Articles> getArticles(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findAll", Articole.class);
-		List<Articole> articole = articolQuery.getResultList();
+		TypedQuery<Articles> articolQuery = em.createNamedQuery("Articles.findAll", Articles.class);
+		List<Articles> articles = articolQuery.getResultList();
 		em.close();
-		return articole;
+		return articles;
 	}
-	public Articole getArticolById(String idstr){
+	public Articles getArticolById(String idstr){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Articole> articolQuery = em.createNamedQuery("Articole.findById", Articole.class);
+		TypedQuery<Articles> articolQuery = em.createNamedQuery("Article.findById", Articles.class);
 		int id = Integer.parseInt(idstr);
 		articolQuery.setParameter("id", id);
-		Articole articole = articolQuery.getSingleResult();
+		Articles articles = articolQuery.getSingleResult();
 		em.close();
-		return articole;
+		return articles;
 	}
-	public List<Articole> getArticoleByMainQuery(MainQuery mainQuery){
+	public List<Articles> getArticlesByMainQuery(MainQuery mainQuery){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 			
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Articole> q = cb.createQuery(Articole.class);
-		Root<Articole> c = q.from(Articole.class);
+		CriteriaQuery<Articles> q = cb.createQuery(Articles.class);
+		Root<Articles> c = q.from(Articles.class);
 		
 		if(mainQuery.nothingSelected()){
 			q.select(c).orderBy(cb.asc(c.get(mainQuery.orderBy())));
@@ -62,12 +62,12 @@ public class ArticolDAO {
 			).orderBy(cb.asc(c.get(mainQuery.orderBy())));
 		}
 		
-		TypedQuery<Articole> articolQuery = em.createQuery(q);
-		List<Articole> articole = articolQuery.getResultList();
+		TypedQuery<Articles> articolQuery = em.createQuery(q);
+		List<Articles> articles = articolQuery.getResultList();
 		em.close();
-		return articole;
+		return articles;
 	}
-	public void addArticol (Articole articol) {
+	public void addArticol (Articles articol) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
@@ -75,7 +75,7 @@ public class ArticolDAO {
 		em.persist(articol);
 		txn.commit();				
 	}
-	public void updateArticol (Articole articol) {
+	public void updateArticol (Articles articol) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
@@ -88,7 +88,7 @@ public class ArticolDAO {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
-		Articole articol = em.find(Articole.class, id);
+		Articles articol = em.find(Articles.class, id);
 		em.remove(articol);
 		txn.commit();
 	}

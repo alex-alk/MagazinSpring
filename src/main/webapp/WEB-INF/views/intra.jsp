@@ -30,13 +30,13 @@
     </header>
     <body><%--incearca si fara hidden --%>
     	<form:form action="/intra" id="login" method="POST" modelAttribute="client">
-	    	<form:hidden path="nume" value=""/><br>
-    		<form:hidden path="prenume" value=""/><br>
-    		<form:hidden path="telefon" value=""/><br>
+	    	<form:hidden path="familyName" value=""/><br>
+    		<form:hidden path="firstName" value=""/><br>
+    		<form:hidden path="tel" value=""/><br>
     		<label>Adresa email</label>
     		<form:input path="email"/><br>
     		<label>Parola:</label><br>
-    		<form:input path="parola"/><br>
+    		<form:input path="password"/><br>
     		<p>${msg}</p>
     		<button type="submit">Întră în cont</button><br>
     		<button type="submit">Recuperare parolă</button>

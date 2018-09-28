@@ -8,43 +8,30 @@
         <title>Magazin acvaristică</title>
         <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/css/style.css">
-        <link rel="shortcut icon" href="fav.ico">
+        <link rel="shortcut icon" href="/resources/img/fav.ico">
         <script src="/resources/js/jquery-3.3.1.min.js"></script>
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
         <script src="/resources/js/script"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    <body>
     <header>
     	<ul>
     		<li><a href="/">Pagina de start</a></li>
-    		<li><a href="/inregistrare">Înregistrare</a></li>
-    		<li><a href="/index.jsp">Intră în cont</a></li>
+    		<li><a href="index.jsp">Înregistrare</a></li>
+    		<li><a href="index.jsp">Intră în cont</a></li>
     	</ul>
     	<ul id=headerRight>
-    		<li><a href="index.jsp"><img id="cos" src="/resources/img/cos.png">Vizualizare comandă</a></li>
+    		<li><a href="/cos"><img id="cos" src="/resources/img/cos.png">Vizualizare comandă</a></li>
     		<li><img id="call" src="/resources/img/call.png">Comenzi telefonice: <p>0740.000.000</p></li>
     	</ul>
     	<img id="headerImg" src="/resources/img/header.png">
     	<h1>Magazin acvaristică</h1>
     </header>
-    <body>
-    	<form:form action="inregistrare" id="login" method="POST" modelAttribute="client">
-	    	<label>Nume:</label><br>
-	    	<form:input path="familyName"/><br>
-	    	<label>Prenume:</label><br>
-    		<form:input path="firstName"/><br>
-    		<label>Telefon:</label><br>
-    		<form:input path="tel"/><br>
-    		<label>Adresa email</label>
-    		<form:input path="email"/><br>
-    		<label>Parola:</label><br>
-    		<form:input path="password" id="conf1"/><br>
-    		<label>Confirmă parola:</label><br>
-    		<input  type="text" id="conf2"><br>
-    		<button type="submit">Înregistrare</button><br>
-    		<button >Schimbă parola</button>
-    	</form:form>
-    	<p></p>
-    </body>
+	<body>
+		<div id=main>
+		${msg}
+		</div>
+	</body>
 </html>
