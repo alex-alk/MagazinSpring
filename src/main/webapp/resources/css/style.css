@@ -1,7 +1,7 @@
 body{
 	background-color: #d6e9c6;
 }
-a:hover{
+header a:hover{
 	text-decoration: none;
 	color: white;
 	opacity: 0.8;
@@ -64,9 +64,13 @@ header>ul{
 	font-size: 123%;
 	padding-left: 30px;
 }
+#headerRight li:nth-child(1) a{
+	width: 9em;
+	padding-bottom: 5px;
+}
 #cos{
 	float: left;
-	margin-right: -15px;
+	margin-right: -20px;
 }
 #asideLeft{
 	float: left;
@@ -125,31 +129,37 @@ header>ul{
 	margin-top: 7px;
 	border-radius: 3px;
 }
-#main table{
-	border-collapse: collapse;
+.article{
+	width: 162px;
+	display: inline-block;
+	color:black;
 	box-shadow: 5px 5px 5px #888888;
 	transition: 0.3s;
 	margin: 16px;
-	display: inline-block;
 }
-#main table:hover{
+.article:hover{
 	transform: scale(1.02);
 	cursor: pointer;
+	text-decoration: none;
+	color: black;
 }
-#main table, th, td{
-	border: 1px solid green;
-	padding: 0;
-}
-#main td{
-	width: 160px;
+.article span{
+	border-top: 1px solid green;
+	display: block;
+	border-left: 1px solid green;
+	border-right: 1px solid green;
 	text-align: center;
 }
-#main tr:nth-child(2) td{
-	padding: 3px;
-	height: 4em;
+.article .price{
+	border-bottom: 1px solid green;
 }
-#main tr:nth-child(1) td{
-	height: 161px;
+.article .name{
+	padding: 2px;
+	height: 4em;
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+	width: 162px;
 }
 #cauta{
 	 margin-left: 100px;
@@ -184,3 +194,102 @@ header>ul{
 	border-right-color: gray;
 	border-bottom-color: gray;
 }
+.description{
+	width: 80%;
+	margin: 0 auto;
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	padding: 30px;
+	min-height: 320px;
+}
+.priceDescription{
+	color: white;
+	background-color: rgb(100,100,100);
+	padding: 3px;
+	border-radius: 2px;
+	float: right;
+	display: block;
+}
+.description h3{
+	text-align: center;
+	margin-bottom: 40px;
+	clear: right;
+}
+.description img{
+	float: left;
+	margin-right: 20px;
+}
+.description p{
+	
+}
+form[action="/cos"] button{
+	width: 8em;
+	margin: 0 auto;
+	display: block;
+	margin-top: 10px;
+}
+#time{
+	color:green;
+    font-weight: bold;
+    padding:1em;
+}
+form[action="/validareComanda"] button{
+	width: 11em;
+	margin: 0 auto;
+	display: block;
+	margin-top: 10px;
+}
+.articlesInCart{
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	margin-left: 10px;
+	max-width: 600px;
+	height: 106px;
+}
+.articlesInCart img{
+	float: left;
+	width: 100px;
+}
+.articleInCartName{
+	margin-left: 110px;
+}
+.articlesInCart input[type="number"]{
+	width: 10em;
+	background-color: #c6e9c6; 
+}
+.articlesInCart .quantity{
+	margin-left: 10px;
+}
+.remove{
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 8.5em;
+	border-radius: 3px;
+	float: right;
+	text-align: center;
+}
+.remove:hover{
+	text-decoration: none;
+	color: white;
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,5 @@
 package com.pack.magazin.model;
 
-import org.springframework.stereotype.Component;
-
 public class OrdersForm {
 	
 	private String articleId;

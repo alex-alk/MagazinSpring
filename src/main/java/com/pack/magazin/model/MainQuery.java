@@ -45,8 +45,8 @@ public class MainQuery {
 	}
 	public String orderBy() {
 		if(order!=null) {
-			if(order.equals("pret"))return "pret";
-			return "nume";
+			if(order.equals("pret"))return "price";
+			return "name";
 		}
 		else return "id";
 	}

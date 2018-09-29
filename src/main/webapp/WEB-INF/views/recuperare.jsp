@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:import url="header.jsp"/>
-   	<form:form action="/intra" id="login" method="POST" modelAttribute="client">
+   	<form:form action="/recuperare" id="login" method="POST" modelAttribute="client">
    	<%-- 
     	<form:hidden path="familyName" value=""/><br>
    		<form:hidden path="firstName" value=""/><br>--%>

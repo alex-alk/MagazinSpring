@@ -1,14 +1,10 @@
 package com.pack.magazin.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import com.pack.magazin.entity.Clients;
 import com.pack.magazin.entity.Orders;
 import com.pack.magazin.factory.JPAEntityFactoryBean;
 

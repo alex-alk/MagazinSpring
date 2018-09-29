@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import com.pack.magazin.entity.Articles;
@@ -50,18 +49,20 @@ public class ArticlesDAO {
 		Root<Articles> c = q.from(Articles.class);
 		
 		if(mainQuery.nothingSelected()){
-			q.select(c).orderBy(cb.asc(c.get(mainQuery.orderBy())));
+			System.out.println(mainQuery.getText());
+			q.select(c).where(cb.like(c.get("name"), "%"+mainQuery.getText()+"%"))
+			.orderBy(cb.asc(c.get(mainQuery.orderBy())));
 		}else {
 			q.select(c).where(
 					cb.or(
-							cb.equal(c.get("categorie"), mainQuery.getPesti()),
-							cb.equal(c.get("categorie"), mainQuery.getHrana()),
-							cb.equal(c.get("categorie"), mainQuery.getAcv()),
-							cb.equal(c.get("categorie"), mainQuery.getAccesorii())
-						 )
-			).orderBy(cb.asc(c.get(mainQuery.orderBy())));
-		}
-		
+							cb.equal(c.get("category"), mainQuery.getPesti()),
+							cb.equal(c.get("category"), mainQuery.getHrana()),
+							cb.equal(c.get("category"), mainQuery.getAcv()),
+							cb.equal(c.get("category"), mainQuery.getAccesorii())
+						 ),cb.like(c.get("name"), "%"+mainQuery.getText()+"%")
+			)
+			.orderBy(cb.asc(c.get(mainQuery.orderBy())));
+		}	
 		TypedQuery<Articles> articolQuery = em.createQuery(q);
 		List<Articles> articles = articolQuery.getResultList();
 		em.close();

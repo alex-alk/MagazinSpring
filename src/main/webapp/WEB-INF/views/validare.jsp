@@ -37,13 +37,13 @@
 					<c:forEach var ="i" items="${idQ}">
 						<c:set var="idArticole" value="${i.key}${space}${idArticole}"/>
 					</c:forEach>
-					<form:hidden path="articleId" value="1"/><p>IdArticol: ${idArticole}</p>
+					<form:hidden path="articleId" value="${idArticole}"/><p>IdArticol: ${idArticole}</p>
 					<c:forEach var ="i" items="${idQ}">
 						<c:set var="cantitati" value="${i.value}${space}${cantitati}"/>
 					</c:forEach>
-					<form:hidden path="quantity" value="2"/><p>Cantitate: ${cantitati}</p>
+					<form:hidden path="quantity" value="${cantitati}"/><p>Cantitate: ${cantitati}</p>
 				</article>
-				<form:hidden path="clientId" value="3"/><p>Client Id: ${clientId}</p>
+				<form:hidden path="clientId" value="${clientId}"/><p>Client Id: ${clientId}</p>
 				<button type="submit">Trimite comanda</button>
 			</div>
 		</form:form>
