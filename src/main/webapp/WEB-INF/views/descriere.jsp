@@ -10,7 +10,8 @@
 		</article>
 	</div>
 	<form action="/cos" method="POST">
-		<input type="hidden" name="id" value="${article.id}">
+		<input type="hidden" name="idA" value="${article.id}">
+		<p style="color:red">${msg}</p>
 		<button type="submit">Adaugă în coș</button>
 	</form>
 <c:import url="footer.jsp"/>

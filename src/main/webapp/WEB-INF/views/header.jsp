@@ -24,8 +24,8 @@
     		<li><a href="/">Pagina de start</a></li>
     		<li><a href="/inregistrare">Înregistrare</a></li>
     		<c:choose>
-    			<c:when test="${cookie.name.value!=null}">
-    				<li><a href="/intra">Utilizator: ${cookie.name.value}</a>
+    			<c:when test="${user != null}">
+    				<li><a href="/intra">Utilizator: ${user.firstName}</a>
     			</c:when>
     			<c:otherwise>
     				<li><a href="/intra">Intră în cont</a></li>
@@ -33,7 +33,13 @@
     		</c:choose>
     	</ul>
     	<ul id=headerRight>
-    		<li><a href="/cos"><img id="cos" src="/resources/img/cos.png">Coș de cumpărături</a></li>
+    		<li><a href="/cos"><img id="cos" src="/resources/img/cos.png">Coș de cumpărături
+    		<c:set var="i" value="0"/>
+    		<c:forEach var="count" items="${products}">
+    			<c:set var="i" value="${i+1}"/>
+    		</c:forEach>	
+    		(${i})
+    			</a></li>
     		<li><img id="call" src="/resources/img/call.png">Comenzi telefonice: <p>0740.000.000</p></li>
     	</ul>
     	<img id="headerImg" src="/resources/img/header.png">

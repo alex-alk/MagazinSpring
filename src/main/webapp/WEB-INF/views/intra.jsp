@@ -3,9 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:import url="header.jsp"/>
    	<form:form action="/intra" id="login" method="POST" modelAttribute="client">
-   	<%-- 
-    	<form:hidden path="familyName" value=""/><br>
-   		<form:hidden path="firstName" value=""/><br>--%>
    		<form:hidden path="tel" value=""/><br>
    		<label>Adresa email</label>
    		<form:input path="email"/><br>

@@ -12,8 +12,6 @@
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
         <script src="/resources/js/script"></script>
-        <meta name="description" content="Magazin online cu pești de acvariu, hrană, accesorii și acvarii.">
-        <meta name="keywords" content="magazin acvaristică, de vânzare, pești, acvariu, acvaristică, accesorii, hrană, pești de acvariu">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>

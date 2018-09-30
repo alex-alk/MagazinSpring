@@ -28,24 +28,25 @@
 				<tr>
 					<td>
 						<p>Denumire:</p>
-						<form:input path="nume"/>
+						<form:input path="name"/>
 						<form:hidden path="id" value="0"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Preț:</p>
-						<form:input path="pretStr"/>
+						<form:input path="priceStr"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Categorie:</p>
-						<form:input path="categorie"/>
+						<form:input path="category"/>
 					</td>
 				</tr>
 			</table>
-			<form:input path="descriere"></form:input>
+			Descriere:
+			<form:input path="description"></form:input>
 			<button type="submit">Adaugă</button>
 		</form:form>
 		<p>${msg}</p>

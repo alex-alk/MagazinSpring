@@ -129,6 +129,11 @@ header>ul{
 	margin-top: 7px;
 	border-radius: 3px;
 }
+#opt a:hover{
+	transform: scale(1.05);
+	text-decoration: none;
+	opacity: 0.8;
+}
 .article{
 	width: 162px;
 	display: inline-block;

@@ -1,25 +1,22 @@
 package com.pack.magazin.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import com.pack.magazin.dao.ArticlesDAO;
 import com.pack.magazin.dao.OrdersDAO;
 import com.pack.magazin.entity.Articles;
 import com.pack.magazin.entity.Clients;
 import com.pack.magazin.entity.Orders;
 import com.pack.magazin.model.OrdersForm;
+import com.pack.magazin.util.CookieUtil;
 
 @Controller
 public class OrdersController {
@@ -30,92 +27,105 @@ public class OrdersController {
 	
 	@RequestMapping(value="/cos", method = RequestMethod.GET)
 	public String cosPageLink(Clients client, Model model, HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		List<Articles> articles = new ArrayList<>();
-		for(Cookie cookie:cookies) {
-			if(cookie.getValue().equals("id")) {
-				articles.add(articlesDAO.getArticolById(cookie.getName()));
-			}
-		}
-		model.addAttribute("client", client);
-		model.addAttribute("articles", articles);
 		return "/cos";
 	} 
+	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/cos", method = RequestMethod.POST)
-	public String cosPageFromDescription(Model model, @RequestParam("id")String id, HttpServletResponse response) {
-		Cookie cookie = new Cookie(id, "id");
-		cookie.setMaxAge(320);
-		response.addCookie(cookie);
+	public String cosPageFromDescription(Model model, @RequestParam("idA")String id, 
+			HttpServletRequest request, Clients client) {
+		HttpSession session = request.getSession();
+		Clients user = (Clients)session.getAttribute("user");
+		if(user==null) {
+			Cookie[] cookies = request.getCookies();
+			String userId = CookieUtil.getCookieValue(cookies, "clientId");
+			if(userId.equals("")) {
+				model.addAttribute("client", client);
+				model.addAttribute("msg","Pentru a adăuga produse trebuie sa vă logați.");
+				return "/intra";
+			}
+		}
+		List<Articles> articles;
+		if(session.getAttribute("products")==null) {
+			articles = new ArrayList<>();
+		}else {
+			articles = (List<Articles>)session.getAttribute("products");
+		}
+		for(Articles article:articles) {
+			if(article.getId()==Integer.parseInt(id)) {
+				model.addAttribute("msg", "Articolul se află deja în coș.");
+				model.addAttribute("article",articlesDAO.getArticolById(id));
+				model.addAttribute("description", articlesDAO.getArticolById(id).getDescription());
+				return "/descriere";
+			}
+		}
+		articles.add(articlesDAO.getArticolById(id));
+		session.setAttribute("products", articles);
+		session.setMaxInactiveInterval(300);
 		return "redirect:/cos";
 	}
 	@RequestMapping(value="/stergeDinCos", method = RequestMethod.GET)
-	public String stergeDinCos(Model model, @RequestParam("id")String id, HttpServletResponse response) {
-		Cookie cookie = new Cookie(id, "id");
-		cookie.setMaxAge(0);
-		response.addCookie(cookie);
-		return "redirect:/cos";
+	public String stergeDinCos(Model model, @RequestParam("idA")String id,
+			@SessionAttribute(name="products")List<Articles> articles) {
+		for(Articles art:articles) {
+			if(Integer.toString(art.getId()).equals(id)) {
+				articles.remove(art);
+				return "redirect:/cos";
+			}
+		}
+		return "";
 	}
 	
 	@RequestMapping(value="/validareComanda", method = RequestMethod.POST)
-	public String validarePage(Model model, HttpServletRequest request, Clients client, OrdersForm ordersForm) {
-		Cookie[] cookies = request.getCookies();
-		for(Cookie cookie:cookies) {
-			if(cookie.getName().equals("name")) {
-				String clientId = "";
-				for(Cookie id:cookies) {
-					if(id.getName().equals("clientId")) {
-						clientId = id.getValue();
-					}
-				}
-				model.addAttribute("clientId", clientId);
-				Map<Integer, Integer> idQ = new HashMap<>();
-				for(Cookie cookieId:cookies) {
-					if(cookieId.getValue().equals("id")) {
-						int artId = Integer.parseInt(cookieId.getName());
-						String quantityStr = request.getParameter(cookieId.getName());
-						if(quantityStr.equals("")||quantityStr.equals("0")) {
-							//Cookie[] cookies = request.getCookies();
-							List<Articles> articles = new ArrayList<>();
-							//for(Cookie cookie:cookies) {
-								//if(cookie.getValue().equals("id")) {
-									articles.add(articlesDAO.getArticolById(cookieId.getName()));
-								//}
-							//}
-							model.addAttribute("articles", articles);
-							model.addAttribute("msg","Cantitatea unui produs nu poate fi zero");
-							return "/cos";
-						}
-						int quantity = Integer.parseInt(quantityStr);
-						idQ.put(artId, quantity);
-					}
-				}
-				model.addAttribute("idQ", idQ);
-				model.addAttribute(ordersForm);
-				return "/validare";
+	public String validarePage(Model model, HttpServletRequest request, Clients client, OrdersForm ordersForm, 
+			HttpServletResponse response, @SessionAttribute(name="products")List<Articles> products) {
+		HttpSession session = request.getSession();
+		Clients user = (Clients)session.getAttribute("user");
+		if(user==null) {
+			Cookie[] cookies = request.getCookies();
+			String userId = CookieUtil.getCookieValue(cookies, "clientId");
+			if(userId.equals("")) {
+				model.addAttribute("client", client);
+				model.addAttribute("msg","Pentru a valida comanda trebuie sa vă logați.");
+				return "/intra";
 			}
 		}
-		model.addAttribute("client", client);
-		model.addAttribute("msg","Pentru a valida comanda trebuie sa vă logați.");
-		return "/intra";
+		String id="";
+		String quantity="";
+		for(Articles product:products){
+			id+= product.getId()+" ";
+			quantity+=request.getParameter(product.getId()+"")+" ";
+		}
+		ordersForm.setQuantity(quantity);
+		ordersForm.setArticleId(id);
+		ordersForm.setClientId(user.getId()+"");
+		String[] quantities = quantity.split(" ");
+		System.out.println(quantity);
+		System.out.println(id);
+		System.out.println(user.getId());
+		session.setAttribute("ordersForm", ordersForm);
+		session.setAttribute("quantities", quantities);
+		session.setMaxInactiveInterval(300);
+		return "validare";
 	}
 	@RequestMapping(value = "/trimite", method = RequestMethod.POST)
-	public String trimite(Model model, @ModelAttribute("ordersForm")OrdersForm ordersForm, Orders order) {
+	public String trimite(Model model, Orders order, @SessionAttribute(name="ordersForm")OrdersForm ordersForm) {
+		
 		String quantity = ordersForm.getQuantity();				//Example: quantity = "1 2"
 		String idArticle = ordersForm.getArticleId();
 		String[] quantityArray = quantity.split(" ");			//quantity array = [1, 2]
 		String[] idArticlesArray = idArticle.split(" ");
 		int idClientToEntity = Integer.parseInt(ordersForm.getClientId());
+		int i = 0;
 		for(String q: quantityArray) {
-			for(String id:idArticlesArray) {
 				int quantityToEntity = Integer.parseInt(q);
-				int idArticlesToEntity = Integer.parseInt(id);
-				System.out.println(idClientToEntity+"--"+idArticlesToEntity +" "+quantityToEntity);
-
+				int idArticlesToEntity = Integer.parseInt(idArticlesArray[i]);
+				System.out.println(idClientToEntity+"-"+idArticlesToEntity +"-"+quantityToEntity);
 				order.setClientId(idClientToEntity);
 				order.setArticlesId(idArticlesToEntity);
 				order.setQuantity(quantityToEntity);
 				ordersDAO.addOrder(order);
-			}	
+			i++;
 		}
 		model.addAttribute("msg", "Comanda a fost trimisă");
 		return "/succes";

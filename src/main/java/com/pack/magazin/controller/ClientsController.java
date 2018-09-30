@@ -1,7 +1,10 @@
 package com.pack.magazin.controller;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -31,20 +34,29 @@ public class ClientsController {
     }
 	
 	@RequestMapping(value="/intra", method = RequestMethod.GET)
-	public String intraPage(Clients client, Model model) {
+	public String intraPage(Clients client, Model model, HttpServletRequest request) {
 		model.addAttribute("client", client);
 		return "/intra";
 	}
+	
 	@RequestMapping(value="/intra",method = RequestMethod.POST)
-    public String intra(Model model, @ModelAttribute("client")Clients client, HttpServletResponse response) {
+    public String intra(Model model, @ModelAttribute("client")Clients client, HttpServletResponse response,
+    		HttpServletRequest request) {
 		Clients clientBaza = clientsDAO.getClientByEmail(client.getEmail());
-    	if (clientBaza.getPassword().equals(client.getPassword())) {
-    		Cookie cookie = new Cookie("name", clientBaza.getFamilyName());
-    		Cookie cookieId = new Cookie("clientId", clientBaza.getId()+"");
-    		cookie.setMaxAge(600);
-    		response.addCookie(cookie);
-    		response.addCookie(cookieId);
-		    return "redirect:/";
+    	if (clientBaza.getEmail().equals(client.getEmail())&&!client.getEmail().isEmpty()) {
+    		if(clientBaza.getPassword().equals(client.getPassword())){
+	    		HttpSession session = request.getSession();
+	    		Clients user = (Clients)session.getAttribute("user");
+	    		if(user!=null) {
+	    			session.invalidate();
+	    		}
+	    		session.setAttribute("user", clientBaza);
+	    		session.setMaxInactiveInterval(300);
+	    		Cookie cookie = new Cookie("clientId", clientBaza.getId()+"");
+	    		cookie.setMaxAge(300);
+	    		response.addCookie(cookie);
+			    return "redirect:/";
+    		}
 		}
 	    model.addAttribute("msg", "Adresa de email nu corespunde cu parola");
 	    return "/intra";
