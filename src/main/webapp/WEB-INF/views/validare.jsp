@@ -2,14 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:import url="header.jsp"/>
-	<form:form action="trimite" method="POST" modelAttribute="ordersForm">
-		<div id=main>
+	<form:form action="/trimite" method="POST" modelAttribute="ordersForm">
+		<div class="description">
 			<article>
-				
-					<form:hidden path="articleId" value="${ordersForm.articleId}"/><p>IdArticol: ${ordersForm.articleId}</p>
-					<form:hidden path="quantity" value="${ordersForm.quantity}"/><p>Cantitate: ${ordersForm.quantity}</p>
-					<form:hidden path="clientId" value="${ordersForm.clientId}"/><p>Client Id: ${ordersForm.clientId}</p>
-				
+				<table id="validationTable">
+					<tr>
+						<th>Denumire</th>
+						<th>Preț</th>
+						<th>Cantitate</th>
+						<th>Cost</th>
+					</tr>	
+					<c:set var="r" value="0"/>
+					<c:forEach var="names" items="${tableSend['names']}">
+						<tr>
+							<c:forEach var="table" items="${tableSend}">							
+									<td>${table.value[r]}</td>						
+							</c:forEach>
+						</tr>
+						<c:set var="r" value="${r+1}"/>
+					</c:forEach>
+				</table>
+					<form:hidden path="articleId" value="${ordersForm.articleId}"/>
+					<form:hidden path="quantity" value="${ordersForm.quantity}"/>
+					<form:hidden path="clientId" value="${ordersForm.clientId}"/>		
 			</article>
 			<button type="submit">Trimite comanda</button>
 		</div>

@@ -284,11 +284,29 @@ form[action="/validareComanda"] button{
 	opacity: 0.8;
 	transform: scale(1.05);
 }
-
-
-
-
-
+#validationTable{
+	width: 400px;
+	margin: 0 auto;
+}
+#validationTable, #validationTable th,
+	#validationTable td{
+	border: 1px solid green;
+	text-align: center;
+	padding: 5px;
+}
+form[action="/trimite"] button{
+	width: 11em;
+	margin: 0 auto;
+	display: block;
+	margin-top: 10px;
+}
+.offersAdmin{
+	display: inline-block;
+	margin-left: 20px;
+}
+.offerDelete{
+	
+}
 
 
 

@@ -6,56 +6,51 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-import com.pack.magazin.entity.Clients;
+import com.pack.magazin.entity.Offers;
 import com.pack.magazin.factory.JPAEntityFactoryBean;
 
 @Component
-public class ClientsDAO {
+public class OffersDAO {
 	@Autowired
 	JPAEntityFactoryBean entityFactoryBean;
 	
-	public List<Clients> getClients(){
+	public List<Offers> getAllOffers(){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Clients> query = em.createNamedQuery("Clients.findAll", Clients.class);
-		List<Clients> Clients = query.getResultList();
+		TypedQuery<Offers> query = em.createNamedQuery("Offers.findAll", Offers.class);
+		List<Offers> offers = query.getResultList();
 		em.close();
-		return Clients;
+		return offers;
 	}
-	public Clients getClientByEmail(String email){
+	public Offers getOfferById(int id){
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		
-		TypedQuery<Clients> query = em.createNamedQuery("Clients.findByEmail", Clients.class);
-		query.setParameter("email", email);
-		Clients client;
-		try {
-			client = query.getSingleResult();
-		}catch(Exception e){
-			client = new Clients();
-		}
-		em.close();
-		return client;
-	}
-	public Clients getClientById(int id){
-		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
-		EntityManager em = emf.createEntityManager();
-		
-		TypedQuery<Clients> query = em.createNamedQuery("Clients.findById", Clients.class);
+		TypedQuery<Offers> query = em.createNamedQuery("Offers.findById", Offers.class);
 		query.setParameter("id", id);
-		Clients client = query.getSingleResult();
+		Offers offer = query.getSingleResult();
 		em.close();
-		return client;
+		return offer;
 	}
-	public void addClient (Clients client) {
+	public void addOffer (Offers offer) {
 		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
-		em.persist(client);
+		em.persist(offer);
+		txn.commit();
+	}
+	public void deleteOffer (Offers offer) {
+		EntityManagerFactory emf = entityFactoryBean.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction txn = em.getTransaction();
+		txn.begin();
+		Offers mergedOffer = em.find(Offers.class, offer.getId());
+		em.remove(mergedOffer);
 		txn.commit();
 	}
 }

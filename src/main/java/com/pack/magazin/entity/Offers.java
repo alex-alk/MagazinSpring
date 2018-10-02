@@ -9,7 +9,10 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Offers.findAll", query="SELECT o FROM Offers o")
+@NamedQueries({
+	@NamedQuery(name="Offers.findAll", query="SELECT o FROM Offers o"),
+	@NamedQuery(name="Offers.findById", query = "SELECT o FROM Offers o WHERE o.id=:id")
+})
 public class Offers implements Serializable {
 	private static final long serialVersionUID = 1L;
 

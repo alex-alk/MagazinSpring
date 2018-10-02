@@ -45,11 +45,9 @@ public class ClientsController {
 		Clients clientBaza = clientsDAO.getClientByEmail(client.getEmail());
     	if (clientBaza.getEmail().equals(client.getEmail())&&!client.getEmail().isEmpty()) {
     		if(clientBaza.getPassword().equals(client.getPassword())){
+	    		HttpSession session1 = request.getSession();
+	    		session1.invalidate();
 	    		HttpSession session = request.getSession();
-	    		Clients user = (Clients)session.getAttribute("user");
-	    		if(user!=null) {
-	    			session.invalidate();
-	    		}
 	    		session.setAttribute("user", clientBaza);
 	    		session.setMaxInactiveInterval(300);
 	    		Cookie cookie = new Cookie("clientId", clientBaza.getId()+"");

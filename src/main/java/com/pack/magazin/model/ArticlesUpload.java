@@ -12,7 +12,7 @@ public class ArticlesUpload {
 	private String description;
 	private int price;
 	private String id;
-
+	
 	public MultipartFile getFile() {
 		return file;
 	}

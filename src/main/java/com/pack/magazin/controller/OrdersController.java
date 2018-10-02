@@ -1,7 +1,11 @@
 package com.pack.magazin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,19 +96,32 @@ public class OrdersController {
 		}
 		String id="";
 		String quantity="";
+		List<String> names = new ArrayList<>();
+		List<String> prices = new ArrayList<>();
+		List<String> quantities = new ArrayList<>();
+		List<String> costs = new ArrayList<>();
+		
 		for(Articles product:products){
 			id+= product.getId()+" ";
 			quantity+=request.getParameter(product.getId()+"")+" ";
+			names.add(product.getname());
+			quantities.add(request.getParameter(product.getId()+""));
+			prices.add(product.getPrice()+"");
+			costs.add((Integer.parseInt(request.getParameter(product.getId()+""))
+					
+					*product.getPrice())+"");
 		}
 		ordersForm.setQuantity(quantity);
 		ordersForm.setArticleId(id);
 		ordersForm.setClientId(user.getId()+"");
-		String[] quantities = quantity.split(" ");
-		System.out.println(quantity);
-		System.out.println(id);
-		System.out.println(user.getId());
-		session.setAttribute("ordersForm", ordersForm);
-		session.setAttribute("quantities", quantities);
+		
+		Map<String,List<String>> tableSend = new LinkedHashMap<String, List<String>>();
+		tableSend.put("names", names);
+		tableSend.put("prices", prices);
+		tableSend.put("quantities", quantities);
+		tableSend.put("costs", costs);
+		
+		session.setAttribute("tableSend", tableSend);
 		session.setMaxInactiveInterval(300);
 		return "validare";
 	}
