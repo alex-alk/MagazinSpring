@@ -6,19 +6,27 @@
     <head>
         <meta charset="utf-8">
         <title>Magazin acvaristică</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/resources/css/codemirror.min.css">
+        <link rel="stylesheet" href="/resources/css/froala_editor.pkgd.min.css">
+        <link rel="stylesheet" href="/resources/css/froala_style.min.css">
         <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/css/style.css">
-        <link rel="shortcut icon" href="fav.ico">
+        <link rel="shortcut icon" href="/resources/img/fav.ico">
+        <script src="/resources/js/popper.min.js"></script>
         <script src="/resources/js/jquery-3.3.1.min.js"></script>
-        <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
-        <script src="/resources/js/script"></script>
+        <script src="/resources/js/codemirror.min.js"></script>
+        <script src="/resources/js/xml.min.js"></script>
+        <script src="/resources/js/froala_editor.pkgd.min.js"></script>
+        <script src="/resources/js/script.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
 		<a href="/">Pagina de start</a>
 		<form:form action="/admin/optiuni/articolUpload" method="POST" enctype="multipart/form-data" modelAttribute="articolUpload">
-			<table>
+			<table id="tableAdd">
 				<tr>
 					<td>  
 						<form:input type="file" path="file"/><br>
@@ -35,20 +43,28 @@
 				<tr>
 					<td>
 						<p>Preț:</p>
-						<form:input path="priceStr"/>
+						<form:input type="number" path="priceStr"/> lei
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<p>Categorie:</p>
-						<form:input path="category"/>
+						<form:select path="category">
+							<form:option value="pesti">Pești</form:option>
+							<form:option value="hrana">Hrană</form:option>
+							<form:option value="accesorii">Accesorii</form:option>
+							<form:option value="acv">Acvarii</form:option>
+						</form:select>
 					</td>
 				</tr>
 			</table>
-			Descriere:
-			<form:input path="description"></form:input>
-			<button type="submit">Adaugă</button>
+			<p style="color:green;font-weight:bold;margin-left:10px">${msg}</p>
+			<span id="d">Descriere:</span>
+			<form:textarea path="description" id="jedit"></form:textarea>
+			<button type="submit" style="margin-left: 10px">Adaugă</button>
 		</form:form>
-		<p>${msg}</p>
+		<footer>
+			<p id="time"></p>
+		</footer>
 	</body>
 </html>

@@ -18,15 +18,38 @@
     		<form:radiobutton path="order" value="nume" id="den" onclick="form.submit()"/><label for="den">Denumire</label><br>
     		<form:radiobutton path="order" value="pret" id="pret" onclick="form.submit()"/><label for="pret">Preț</label><br>
    		</aside>
-   	</form:form>
-   	
-    <div id=main>
-    	<c:forEach items="${articles}" var="article">
-	  		<a href="descriere?id=${article.id}" class="article">
-    			<span class="img"><img src="${article.imageURL}"></span>
-    			<span class="name">${article.name}</span>
-    			<span class="price">Preț: ${article.price} lei</span>
-    		</a>
-    	</c:forEach>
-    </div>
+	    <aside id="asideRight">
+	    	<a>
+	    		<img src="/resources/offers/o1.jpg"></img>
+	    	</a>
+	    </aside>
+	    <div id=main>
+	    	<c:forEach items="${articles}" var="article">
+		  		<a href="descriere?id=${article.id}" class="article">
+	    			<span class="img"><img src="${article.imageURL}"></span>
+	    			<span class="name">${article.name}</span>
+	    			<span class="price">Preț: ${article.price} lei</span>
+	    		</a>
+	    	</c:forEach>
+	    </div>
+	    <div id="paging">
+	    	<c:choose>
+	    		<c:when test="${page==1}">
+	    			<button type="submit" name="page" value="${page}">&lt;-</button>
+	    		</c:when>
+	    		<c:otherwise>
+	    			<button type="submit" name="page" value="${page-1}">&lt;-</button>
+	    		</c:otherwise>
+	    	</c:choose>
+	    	<span>Pagina ${page} din ${pages}</span>
+	    	<c:choose>
+	    		<c:when test="${page==pages}">
+	    			<button type="submit" name="page" value="${page}">-&gt;</button>
+	    		</c:when>
+	    		<c:otherwise>
+	    			<button type="submit" name="page" value="${page+1}">-&gt;</button>
+	    		</c:otherwise>
+	    	</c:choose>
+    	</div>
+    </form:form>
 <c:import url="footer.jsp"/>

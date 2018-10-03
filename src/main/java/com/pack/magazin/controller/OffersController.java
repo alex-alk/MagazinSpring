@@ -63,7 +63,7 @@ public class OffersController {
     	if (!file.getOriginalFilename().isEmpty()) {
 			String fullFileName = file.getOriginalFilename();
 		 	String fileName = fullFileName.substring(fullFileName.lastIndexOf("\\")+1, fullFileName.length());   	  
-		 	final File folder = new File(sc.getRealPath("/resources/offers"));
+		 	final File folder = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/offers");
 		 	for (final File fileEntry : folder.listFiles()) {
 			  if(fileEntry.getName().equals(fileName)) {
 				 List<Offers> offers = offersDAO.getAllOffers();
@@ -78,7 +78,7 @@ public class OffersController {
 		   	
 		   	System.out.println(sc.getRealPath("/"));
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-	                     						             new File(sc.getRealPath("/resources/offers/"), fileName)));
+	                     						             new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/offers", fileName)));
 	        outputStream.write(file.getBytes());
 	        outputStream.flush();
 	        outputStream.close();
@@ -95,11 +95,9 @@ public class OffersController {
 	}
 	@RequestMapping(value="/admin/optiuni/oferte/sterge",method = RequestMethod.GET)
     public String deleteOffer(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Offers offer, ArticlesUpload fileA) throws IOException {
-		ServletContext sc = request.getServletContext();
 		model.addAttribute("mainQuery", mainQuery);
 		Offers articol = offersDAO.getOfferById(Integer.parseInt(idStr));
-	 	String fileURL = sc.getRealPath("/") + articol.getUrl();
-	 	File file = new File(fileURL);
+	 	File file = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp" + articol.getUrl());
 	   	file.delete();
 	   	int id = Integer.parseInt(idStr);
 	   	offer = offersDAO.getOfferById(id);

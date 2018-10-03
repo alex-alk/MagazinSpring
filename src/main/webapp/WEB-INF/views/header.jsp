@@ -12,10 +12,10 @@
         <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
         <script src="/resources/js/script.js"></script>
-        <c:if test="${description==null}">
+        <c:if test="${article.name==null}">
         	<meta name="description" content="Magazin online cu pești de acvariu, hrană, accesorii și acvarii.">
         </c:if>
-        <meta name="description" content="${description}">
+        <meta name="description" content="${article.name}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>

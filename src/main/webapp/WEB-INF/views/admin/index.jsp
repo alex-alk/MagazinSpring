@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <html lang="ro">
     <head>
@@ -15,14 +16,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<form action="/admin/optiuni" id="login" method="POST">
+    	<form:form action="/admin/optiuni" id="login" method="POST" modelAttribute="admin">
 	    	<label>Nume de utilizator:</label><br>
-	    	<input type="text"><br>
+	    	<form:input path="username"/><br>
 	    	<label>Parola:</label><br>
-    		<input type="text"><br>
+    		<form:input path="password"/><br>
+    		<p style="color:red">${msg}</p>
     		<button type="submit">Intră în cont</button>
     		<button type="submit">Schimbă parola</button>
-    	</form>
+    	</form:form>
     	<p></p>
     </body>
 </html>

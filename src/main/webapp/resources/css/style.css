@@ -77,6 +77,7 @@ header>ul{
 	background-color: rgba(100,150,100,0.5);
 	border-radius: 5px;
 	padding: 5px;
+	margin-left: 2px;
 }
 #asideLeft label{
 	margin-left: 5px;
@@ -91,8 +92,9 @@ header>ul{
 	border-style: double;
 	border-color: #255625;
 	box-shadow: 5px 5px 5px #888888;
-	padding: 0;
-	margin-left: 100px;
+	margin-left: 120px;
+	margin-right: 200px;
+	padding: 13px;
 }
 #login{
 	border-width: 3px;
@@ -167,7 +169,7 @@ header>ul{
 	width: 162px;
 }
 #cauta{
-	 margin-left: 100px;
+	 margin-left: 120px;
 }
 #cauta input{
 	background-color: #c6e9c6;
@@ -307,12 +309,37 @@ form[action="/trimite"] button{
 .offerDelete{
 	
 }
-
-
-
-
-
-
+#tableAdd{
+	margin: 30px;
+}
+#tableAdd, #tableAdd td{
+	border: 1px solid green;
+	text-align: center;
+	padding: 5px;
+}
+div.fr-box{
+	position: absolute; 
+	width: 50%;
+	left: 400px;
+	top: 50px;
+}
+#d{
+	position: absolute;
+	left: 400px;
+	top: 25px;
+	font-weight: bold;
+}
+div.fr-box div, div.fr-box span.fr-counter{
+	background-color: #d6e9c6;
+}
+#asideRight{
+	float: right;
+	margin-right: 10px;
+}
+#paging{
+	width: 300px;
+	margin: 5px auto;
+}
 
 
 
