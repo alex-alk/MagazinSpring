@@ -23,7 +23,6 @@
     		<form:input path="password"/><br>
     		<p style="color:red">${msg}</p>
     		<button type="submit">Intră în cont</button>
-    		<button type="submit">Schimbă parola</button>
     	</form:form>
     	<p></p>
     </body>

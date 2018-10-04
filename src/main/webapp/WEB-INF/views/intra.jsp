@@ -8,7 +8,7 @@
    		<form:input path="email"/><br>
    		<label>Parola:</label><br>
    		<form:input path="password"/><br>
-   		<p style="color:red">${msg}</p>
+   		<p style="color: green; font-weight: bold">${msg}</p>
    		<button type="submit">Întră în cont</button><br>
    		<button type="submit">Recuperare parolă</button>
    	</form:form>

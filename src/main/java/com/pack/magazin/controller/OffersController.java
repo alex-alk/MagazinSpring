@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -21,6 +22,7 @@ import com.pack.magazin.dao.ArticlesDAO;
 import com.pack.magazin.dao.ClientsDAO;
 import com.pack.magazin.dao.OffersDAO;
 import com.pack.magazin.dao.OrdersDAO;
+import com.pack.magazin.entity.Admin;
 import com.pack.magazin.entity.Articles;
 import com.pack.magazin.entity.Offers;
 import com.pack.magazin.entity.Orders;
@@ -48,7 +50,13 @@ public class OffersController {
 	ServletContext context;
 	
 	@RequestMapping(value="/admin/optiuni/oferte", method = RequestMethod.GET)
-	public String viewOffers(Model model, ArticlesUpload file) {
+	public String viewOffers(Model model, ArticlesUpload file, Admin admin, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("file", file);
 		List<Offers> offers = offersDAO.getAllOffers();
 		model.addAttribute("offers", offers);
@@ -94,7 +102,14 @@ public class OffersController {
 	    return "/admin/optiuni/oferte";
 	}
 	@RequestMapping(value="/admin/optiuni/oferte/sterge",method = RequestMethod.GET)
-    public String deleteOffer(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Offers offer, ArticlesUpload fileA) throws IOException {
+    public String deleteOffer(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Offers offer, 
+    		ArticlesUpload fileA, Admin admin) throws IOException {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("mainQuery", mainQuery);
 		Offers articol = offersDAO.getOfferById(Integer.parseInt(idStr));
 	 	File file = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp" + articol.getUrl());

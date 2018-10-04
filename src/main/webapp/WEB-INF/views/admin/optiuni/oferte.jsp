@@ -19,6 +19,7 @@
 		<a href="/">Pagina de start</a>
 		<form:form modelAttribute="file" action="/admin/optiuni/oferte" method="POST" enctype="multipart/form-data">
 			<form:input type="file" path="file"/><br>
+			Lățime imagine :170px
 			<button type="submit">Adaugă</button>
 		</form:form>
 		<p>${msg}</p>

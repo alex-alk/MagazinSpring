@@ -19,9 +19,26 @@
     		<form:radiobutton path="order" value="pret" id="pret" onclick="form.submit()"/><label for="pret">Preț</label><br>
    		</aside>
 	    <aside id="asideRight">
-	    	<a>
-	    		<img src="/resources/offers/o1.jpg"></img>
-	    	</a>
+		    <div class="carousel slide" data-ride="carousel">
+			  <div class="carousel-inner">
+			    <c:set var="i" value="0"/>
+			    <c:forEach var="offer" items="${offers}">
+			    	<c:choose>
+				    	<c:when test="${i==0}">
+						     <div class="carousel-item active">
+						      <img class="d-block w-100" src="${offers[i].url}" alt="First slide">
+						    </div>
+				    	</c:when>
+				    	<c:otherwise>
+						    <div class="carousel-item">
+						      <img class="d-block w-100" src="${offers[i].url }">
+						    </div>
+					    </c:otherwise>
+				    </c:choose>
+					<c:set var="i" value="${i+1}"/>
+				 </c:forEach>
+			  </div>
+			</div>
 	    </aside>
 	    <div id=main>
 	    	<c:forEach items="${articles}" var="article">

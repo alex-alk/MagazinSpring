@@ -256,6 +256,7 @@ form[action="/validareComanda"] button{
 	margin-left: 10px;
 	max-width: 600px;
 	height: 106px;
+	margin-bottom: 5px;
 }
 .articlesInCart img{
 	float: left;
@@ -340,6 +341,9 @@ div.fr-box div, div.fr-box span.fr-counter{
 	width: 300px;
 	margin: 5px auto;
 }
-
+#paging button{
+	background-color: green;
+	color: white;
+}
 
 

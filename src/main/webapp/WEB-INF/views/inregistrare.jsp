@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:import url="header.jsp"/>
     <body>
-    	<form:form action="inregistrare" id="login" method="POST" modelAttribute="client">
+    	<form:form action="/inregistrare" id="login" method="POST" modelAttribute="client">
 	    	<label>Nume:</label><br>
 	    	<form:input path="familyName"/><br>
 	    	<label>Prenume:</label><br>
@@ -17,7 +17,6 @@
     		<label>Confirmă parola:</label><br>
     		<input  type="text" id="conf2"><br>
     		<button type="submit">Înregistrare</button><br>
-    		<button >Schimbă parola</button>
     	</form:form>
     	<p></p>
 <c:import url="footer.jsp"/>

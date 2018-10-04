@@ -20,7 +20,7 @@ public class Offers implements Serializable {
 	private int id;
 
 	private String url;
-
+	
 	public Offers() {
 	}
 
