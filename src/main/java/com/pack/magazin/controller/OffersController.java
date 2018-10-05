@@ -45,9 +45,6 @@ public class OffersController {
 	ClientsDAO clientsDAO;
 	@Autowired 
 	OffersDAO offersDAO;
-	@Autowired
-	static
-	ServletContext context;
 	
 	@RequestMapping(value="/admin/optiuni/oferte", method = RequestMethod.GET)
 	public String viewOffers(Model model, ArticlesUpload file, Admin admin, HttpServletRequest request) {
