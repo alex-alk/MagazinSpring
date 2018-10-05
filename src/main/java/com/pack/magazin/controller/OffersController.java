@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -21,6 +22,7 @@ import com.pack.magazin.dao.ArticlesDAO;
 import com.pack.magazin.dao.ClientsDAO;
 import com.pack.magazin.dao.OffersDAO;
 import com.pack.magazin.dao.OrdersDAO;
+import com.pack.magazin.entity.Admin;
 import com.pack.magazin.entity.Articles;
 import com.pack.magazin.entity.Offers;
 import com.pack.magazin.entity.Orders;
@@ -43,12 +45,15 @@ public class OffersController {
 	ClientsDAO clientsDAO;
 	@Autowired 
 	OffersDAO offersDAO;
-	@Autowired
-	static
-	ServletContext context;
 	
 	@RequestMapping(value="/admin/optiuni/oferte", method = RequestMethod.GET)
-	public String viewOffers(Model model, ArticlesUpload file) {
+	public String viewOffers(Model model, ArticlesUpload file, Admin admin, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("file", file);
 		List<Offers> offers = offersDAO.getAllOffers();
 		model.addAttribute("offers", offers);
@@ -63,7 +68,7 @@ public class OffersController {
     	if (!file.getOriginalFilename().isEmpty()) {
 			String fullFileName = file.getOriginalFilename();
 		 	String fileName = fullFileName.substring(fullFileName.lastIndexOf("\\")+1, fullFileName.length());   	  
-		 	final File folder = new File(sc.getRealPath("/resources/offers"));
+		 	final File folder = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/offers");
 		 	for (final File fileEntry : folder.listFiles()) {
 			  if(fileEntry.getName().equals(fileName)) {
 				 List<Offers> offers = offersDAO.getAllOffers();
@@ -78,7 +83,7 @@ public class OffersController {
 		   	
 		   	System.out.println(sc.getRealPath("/"));
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-	                     						             new File(sc.getRealPath("/resources/offers/"), fileName)));
+	                     						             new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/offers", fileName)));
 	        outputStream.write(file.getBytes());
 	        outputStream.flush();
 	        outputStream.close();
@@ -94,12 +99,17 @@ public class OffersController {
 	    return "/admin/optiuni/oferte";
 	}
 	@RequestMapping(value="/admin/optiuni/oferte/sterge",method = RequestMethod.GET)
-    public String deleteOffer(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Offers offer, ArticlesUpload fileA) throws IOException {
-		ServletContext sc = request.getServletContext();
+    public String deleteOffer(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Offers offer, 
+    		ArticlesUpload fileA, Admin admin) throws IOException {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("mainQuery", mainQuery);
 		Offers articol = offersDAO.getOfferById(Integer.parseInt(idStr));
-	 	String fileURL = sc.getRealPath("/") + articol.getUrl();
-	 	File file = new File(fileURL);
+	 	File file = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp" + articol.getUrl());
 	   	file.delete();
 	   	int id = Integer.parseInt(idStr);
 	   	offer = offersDAO.getOfferById(id);

@@ -8,14 +8,13 @@
         <title>Magazin acvaristică</title>
         <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/css/style.css">
-        <link rel="shortcut icon" href="fav.ico">
+        <link rel="shortcut icon" href="/resources/fav.ico">
+        <script src="/resources/js/popper.min.js"></script>
         <script src="/resources/js/jquery-3.3.1.min.js"></script>
-        <script src="/resources/js/popper.js"></script>
         <script src="/resources/js/bootstrap.min.js"></script>
-        <script src="/resources/js/script"></script>
+        <script src="/resources/js/script.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <body>
+    </head>
     	<ul>
     		<li class="startStyle"><a href="/">Pagina de start</a></li>
     	</ul>	
@@ -35,28 +34,14 @@
 	    		<form:radiobutton path="order" value="pret" id="pret" onclick="form.submit()"/><label for="pret">Preț</label><br>
     		</aside>
     	</form:form>
-    <div id=main>
-    	<c:forEach items="${articole}" var="articol">
-	    	<table>
-	    		<tr>
-	    			<td><img src="${articol.imagineURL}"></td>
-	    		</tr>
-	    		<tr>
-	    			<td>${articol.nume}</td>
-	    		</tr>
-	    		<tr>
-	    			<td>Preț: ${articol.pret} leii<a href="descriere?id=${articol.id}">AAAA</a>a></td>
-	    		</tr>
-	    		<tr>
-	    			<td>
-	    				<form action="/admin/optiuni/sterge" method="POST">
-	    					<input type="hidden" name="id" value="${articol.id}">
-	    					<button type="submit">Șterge</button>
-	    				</form>
-	    			</td>
-	    		</tr>
-	    	</table>
-    	</c:forEach>
-    </div>
+	    <div id=main>
+	    	<c:forEach items="${articles}" var="article">
+		  		<a href="/admin/optiuni/sterge?id=${article.id}" class="article">
+	    			<span class="img"><img src="${article.imageURL}"></span>
+	    			<span class="name">${article.name}</span>
+	    			<span class="price">Preț: ${article.price} lei</span>
+	    		</a>
+	    	</c:forEach>
+	    </div>
     </body>
 </html>

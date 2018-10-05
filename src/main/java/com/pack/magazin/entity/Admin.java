@@ -3,12 +3,15 @@ package com.pack.magazin.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
+
 
 /**
  * The persistent class for the admin database table.
  * 
  */
 @Entity
+@Component
 @NamedQuery(name="Admin.findAll", query="SELECT a FROM Admin a")
 public class Admin implements Serializable {
 	private static final long serialVersionUID = 1L;

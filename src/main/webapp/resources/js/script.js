@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$("#jedit").froalaEditor();
 	time();
 });
 function time()

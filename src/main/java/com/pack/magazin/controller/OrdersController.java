@@ -31,13 +31,25 @@ public class OrdersController {
 	
 	@RequestMapping(value="/cos", method = RequestMethod.GET)
 	public String cosPageLink(Clients client, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Clients user = (Clients)session.getAttribute("user");
+		if(user==null) {
+			Cookie[] cookies = request.getCookies();
+			String userId = CookieUtil.getCookieValue(cookies, "clientId");
+			if(userId.equals("")) {
+				model.addAttribute("client", client);
+				model.addAttribute("msg","Pentru a vizualiza coșul de cumpărături trebuie sa vă logați.");
+				return "/intra";
+			}
+		}
 		return "/cos";
 	} 
 	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/cos", method = RequestMethod.POST)
 	public String cosPageFromDescription(Model model, @RequestParam("idA")String id, 
-			HttpServletRequest request, Clients client) {
+		HttpServletRequest request, Clients client) {
 		HttpSession session = request.getSession();
 		Clients user = (Clients)session.getAttribute("user");
 		if(user==null) {
@@ -65,7 +77,7 @@ public class OrdersController {
 		}
 		articles.add(articlesDAO.getArticolById(id));
 		session.setAttribute("products", articles);
-		session.setMaxInactiveInterval(300);
+		System.out.println("products set");
 		return "redirect:/cos";
 	}
 	@RequestMapping(value="/stergeDinCos", method = RequestMethod.GET)
@@ -82,8 +94,14 @@ public class OrdersController {
 	
 	@RequestMapping(value="/validareComanda", method = RequestMethod.POST)
 	public String validarePage(Model model, HttpServletRequest request, Clients client, OrdersForm ordersForm, 
-			HttpServletResponse response, @SessionAttribute(name="products")List<Articles> products) {
+			HttpServletResponse response) {
 		HttpSession session = request.getSession();
+		@SuppressWarnings("unchecked")
+		List<Articles> products = (List<Articles>)session.getAttribute("products");
+		if(products==null) {
+			model.addAttribute("msg", "Coșul de cumpărături este gol");
+			return "/cos";
+		}
 		Clients user = (Clients)session.getAttribute("user");
 		if(user==null) {
 			Cookie[] cookies = request.getCookies();
@@ -103,13 +121,17 @@ public class OrdersController {
 		
 		for(Articles product:products){
 			id+= product.getId()+" ";
-			quantity+=request.getParameter(product.getId()+"")+" ";
+			quantity+=request.getParameter(product.getId()+"")+" ";;
 			names.add(product.getname());
 			quantities.add(request.getParameter(product.getId()+""));
 			prices.add(product.getPrice()+"");
-			costs.add((Integer.parseInt(request.getParameter(product.getId()+""))
-					
-					*product.getPrice())+"");
+			try {
+				Integer.parseInt(request.getParameter(product.getId()+""));
+			}catch(Exception e) {
+				model.addAttribute("msg", "Cantitatea nu poate fi zero.");
+				return "/cos";
+			}
+			costs.add((Integer.parseInt(request.getParameter(product.getId()+""))*product.getPrice())+"");
 		}
 		ordersForm.setQuantity(quantity);
 		ordersForm.setArticleId(id);
@@ -120,24 +142,22 @@ public class OrdersController {
 		tableSend.put("prices", prices);
 		tableSend.put("quantities", quantities);
 		tableSend.put("costs", costs);
-		
+		session.setAttribute("ordersForm", ordersForm);
 		session.setAttribute("tableSend", tableSend);
-		session.setMaxInactiveInterval(300);
 		return "validare";
 	}
 	@RequestMapping(value = "/trimite", method = RequestMethod.POST)
 	public String trimite(Model model, Orders order, @SessionAttribute(name="ordersForm")OrdersForm ordersForm) {
 		
-		String quantity = ordersForm.getQuantity();				//Example: quantity = "1 2"
+		String quantity = ordersForm.getQuantity();
 		String idArticle = ordersForm.getArticleId();
-		String[] quantityArray = quantity.split(" ");			//quantity array = [1, 2]
+		String[] quantityArray = quantity.split(" ");
 		String[] idArticlesArray = idArticle.split(" ");
 		int idClientToEntity = Integer.parseInt(ordersForm.getClientId());
 		int i = 0;
 		for(String q: quantityArray) {
 				int quantityToEntity = Integer.parseInt(q);
 				int idArticlesToEntity = Integer.parseInt(idArticlesArray[i]);
-				System.out.println(idClientToEntity+"-"+idArticlesToEntity +"-"+quantityToEntity);
 				order.setClientId(idClientToEntity);
 				order.setArticlesId(idArticlesToEntity);
 				order.setQuantity(quantityToEntity);

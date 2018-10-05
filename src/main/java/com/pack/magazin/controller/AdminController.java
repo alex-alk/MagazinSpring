@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -19,14 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pack.magazin.dao.AdminDAO;
 import com.pack.magazin.dao.ArticlesDAO;
 import com.pack.magazin.dao.ClientsDAO;
-import com.pack.magazin.dao.OffersDAO;
 import com.pack.magazin.dao.OrdersDAO;
+import com.pack.magazin.entity.Admin;
 import com.pack.magazin.entity.Articles;
-import com.pack.magazin.entity.Offers;
 import com.pack.magazin.entity.Orders;
 import com.pack.magazin.model.ArticlesUpload;
 import com.pack.magazin.model.MainQuery;
-import com.pack.magazin.model.OffersUpload;
 import com.pack.magazin.model.OrdersTable;
 
 @Controller
@@ -41,24 +40,49 @@ public class AdminController {
 	OrdersDAO ordersDAO;
 	@Autowired
 	ClientsDAO clientsDAO;
-	@Autowired 
-	OffersDAO offersDAO;
 	
 	@RequestMapping(value="admin/optiuni", method=RequestMethod.POST)
-	public String getAdmins(Model model) {
-		return "admin/optiuni/index";
-	}
-	@RequestMapping(value="admin/optiuni", method=RequestMethod.GET)
-	public String getAdminsGET(Model model) {
-		return "admin/optiuni/index";
-	}
-	@RequestMapping(value="admin", method=RequestMethod.GET)
-	public String adminPage() {
+	public String getAdmins(Model model, @ModelAttribute("admin")Admin admin, HttpServletRequest request) {
+		Admin adminBaza = adminDAO.getAdmin();
+		if(adminBaza.getUsername().equals(admin.getUsername())) {
+			if(adminBaza.getPassword().equals(admin.getPassword())) {
+				HttpSession session = request.getSession();
+				session.setAttribute("admin", admin.getUsername());
+				return "admin/optiuni/index";
+			}
+		}
+		model.addAttribute("msg","Numele nu corespunde cu parola.");
 		return "admin/index";
 	}
-	//edit article
+	@RequestMapping(value="admin/optiuni", method=RequestMethod.GET)
+	public String getAdminsGET(Model model, HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
+		return "/admin/optiuni/index";
+	}
+	@RequestMapping(value="/admin", method=RequestMethod.GET)
+	public String adminPage(Model model, Admin admin, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")!=null) {
+			return "/admin/optiuni/index";
+		}
+		return "/admin/index";
+	}
+	
 	@RequestMapping(value="/admin/optiuni/editeaza",method = RequestMethod.GET)
-    public String editArticlePage(Model model, ArticlesUpload articlesUpload, @RequestParam("id") String idstr) {
+    public String editArticlePage(Model model, ArticlesUpload articlesUpload, @RequestParam("id") String idstr,
+    		HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		Articles articol = articlesDAO.getArticolById(idstr);
 		model.addAttribute("articol", articol);
 		model.addAttribute("articolUpload", articlesUpload); 	
@@ -83,21 +107,25 @@ public class AdminController {
 		   	articlesDAO.updateArticol(articol);
 		   	ServletContext sc = request.getServletContext();
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-	                     						             new File(sc.getRealPath("/resources/offers/"), fileName)));
+	                     						             new File(sc.getRealPath("/resources/uploads/"), fileName)));
 	        outputStream.write(file.getBytes());
 	        outputStream.flush();
 	        outputStream.close();
-	        model.addAttribute("msg", "Articol editat");
+	        model.addAttribute("msg", "Articol editat.");
       } else {
           model.addAttribute("msg", "Selectează un fișier");
      }
      return "/admin/optiuni/editeaza";
     }
-	//end edit article
 	
-	//add article
 	@RequestMapping(value="/admin/optiuni/adauga",method = RequestMethod.GET)
-    public String articolUploadSet(Model model, ArticlesUpload articlesUpload) {
+    public String articolUploadSet(Model model, ArticlesUpload articlesUpload, HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("articolUpload", articlesUpload); 	
 		return "/admin/optiuni/adauga";
 	}
@@ -114,7 +142,8 @@ public class AdminController {
     	if (!file.getOriginalFilename().isEmpty()) {
 			String fullFileName = file.getOriginalFilename();
 		 	String fileName = fullFileName.substring(fullFileName.lastIndexOf("\\")+1, fullFileName.length());   	  
-		 	final File folder = new File(sc.getRealPath("/resources/offers"));
+		 	final File folder = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/uploads");
+		 	System.out.println(sc.getRealPath("/"));
 		 	for (final File fileEntry : folder.listFiles()) {
 			  if(fileEntry.getName().equals(fileName)) {
 			     model.addAttribute("msg", "Fișierul există deja");
@@ -128,63 +157,100 @@ public class AdminController {
 		   	articol.setPrice(articlesUpload.getPrice());
 		   	articlesDAO.addArticol(articol);
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-	                     						             new File(sc.getRealPath("/resources/offers/"), fileName)));
+	                     						             new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/uploads", fileName)));
+	        System.out.println(fileName);
+	        System.out.println(sc.getRealPath("/resources/uploads/"));
 	        outputStream.write(file.getBytes());
 	        outputStream.flush();
 	        outputStream.close();
-	        model.addAttribute("msg", "articol adăugat");
+	        model.addAttribute("msg", "Articol adăugat");
       } else {
           model.addAttribute("msg", "Selectează un fișier");
      }
      return "/admin/optiuni/adauga";
     }
-    //end add article
     
     //delete article
     @RequestMapping(value="/admin/optiuni/stergere",method = RequestMethod.GET)
-    public String deleteArticlePage(Model model) {
-    	model.addAttribute("articole",articlesDAO.getArticles());
+    public String deleteArticlePage(Model model, HttpServletRequest request, Admin admin) {
+    	model.addAttribute(admin);
+    	HttpSession session = request.getSession();
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
+    	model.addAttribute("articles",articlesDAO.getAllArticles());
 		model.addAttribute("mainQuery", mainQuery);	
 		return "/admin/optiuni/stergere";
 	}
     @RequestMapping(value="/admin/optiuni/stergere/cauta",method = RequestMethod.GET)
-    public String deleteArticlePageSearch(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery){
-    	model.addAttribute("articole", articlesDAO.getArticlesByMainQuery(mainQuery));
+    public String deleteArticlePageSearch(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery,
+    		HttpServletRequest request, Admin admin){
+    	model.addAttribute(admin);
+    	HttpSession session = request.getSession();
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
+    	model.addAttribute("articles", articlesDAO.getArticlesByMainQuery(mainQuery));
 		model.addAttribute("mainQuery", mainQuery);	
 		return "/admin/optiuni/stergere";
 	}
-    //adaugare cauta si la edit
     
-	@RequestMapping(value="/admin/optiuni/sterge",method = RequestMethod.POST)
-    public String deleteArticle(Model model, @RequestParam("id")String idStr, HttpServletRequest request) throws IOException {
+	@RequestMapping(value="/admin/optiuni/sterge",method = RequestMethod.GET)
+    public String deleteArticle(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Admin admin) throws IOException {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("mainQuery", mainQuery);
-		ServletContext sc = request.getServletContext();
 		Articles articol = articlesDAO.getArticolById(idStr);
-	 	String fileURL = sc.getRealPath("/") + articol.getImageURL();
+	 	String fileURL = "E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp" + articol.getImageURL();
 	 	File file = new File(fileURL);
 	   	file.delete();
 	   	int id = Integer.parseInt(idStr);
         articlesDAO.deleteArticol(id);
-        model.addAttribute("articole",articlesDAO.getArticles());
+        model.addAttribute("articole",articlesDAO.getAllArticles());
      return "redirect:/admin/optiuni/stergere";
     }
+	
 	//display articles to be edited
 	@RequestMapping(value="/admin/optiuni/editare", method = RequestMethod.GET)
-	public String editare(Model model) {
+	public String editare(Model model, HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		model.addAttribute("mainQuery", mainQuery);
-		model.addAttribute("articole", articlesDAO.getArticles());
+		model.addAttribute("articles", articlesDAO.getAllArticles());
 		return "/admin/optiuni/editare";
 	}
 	
 	@RequestMapping(value="/admin/optiuni/editare/cauta", method = RequestMethod.GET)
-	public String editareCauta(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery) {
-		model.addAttribute("articole", articlesDAO.getArticlesByMainQuery(mainQuery));
+	public String editareCauta(Model model, @ModelAttribute("mainQuery")MainQuery mainQuery, HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
+		model.addAttribute("articles", articlesDAO.getArticlesByMainQuery(mainQuery));
 		return "/admin/optiuni/editare";
 	}
 	//end display articles to be edited
 	
 	@RequestMapping(value="/admin/optiuni/comenzi", method = RequestMethod.GET)
-	public String displayComenzi(Model model) {
+	public String displayComenzi(Model model, HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		List<Orders> orders;
 		orders = ordersDAO.getAllOrders();
 		OrdersTable ordersTable;
@@ -203,7 +269,13 @@ public class AdminController {
 		return "/admin/optiuni/comenzi";
 	}
 	@RequestMapping(value="/admin/optiuni/comenzi/sterge", method = RequestMethod.GET)
-	public String deleteComenzi(Model model, @RequestParam("id")String idStr) {
+	public String deleteComenzi(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Admin admin) {
+		HttpSession session = request.getSession();
+		model.addAttribute(admin);
+		if(session.getAttribute("admin")==null) {
+			model.addAttribute("msg","Trebuie să vă logați.");
+			return "/admin/index";
+		}
 		List<Orders> orders;
 		ordersDAO.deleteOrder(ordersDAO.getOrderById(Integer.parseInt(idStr)));
 		orders = ordersDAO.getAllOrders();
@@ -221,6 +293,5 @@ public class AdminController {
 		}
 		model.addAttribute("ordersTableList", ordersTableList);
 		return "/admin/optiuni/comenzi";
-	}
-		
+	}	
 }

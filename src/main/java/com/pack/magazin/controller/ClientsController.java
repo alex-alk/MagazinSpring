@@ -30,7 +30,8 @@ public class ClientsController {
 		         return "/inregistrare";
 		}
 		clientsDAO.addClient(client);
-	    return "redirect:/";
+		model.addAttribute("msg", "Ați fost înregistrat cu succes.");
+	    return "/intra";
     }
 	
 	@RequestMapping(value="/intra", method = RequestMethod.GET)
@@ -49,7 +50,6 @@ public class ClientsController {
 	    		session1.invalidate();
 	    		HttpSession session = request.getSession();
 	    		session.setAttribute("user", clientBaza);
-	    		session.setMaxInactiveInterval(300);
 	    		Cookie cookie = new Cookie("clientId", clientBaza.getId()+"");
 	    		cookie.setMaxAge(300);
 	    		response.addCookie(cookie);
