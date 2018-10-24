@@ -9,6 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="clients")
 @NamedQueries({
 	@NamedQuery(name="Clients.findAll", query="SELECT c FROM Clients c"),
 	@NamedQuery(name="Clients.findByEmail", query = "SELECT c FROM Clients c WHERE c.email=:email"),

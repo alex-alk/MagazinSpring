@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Entity
+@Table(name="admin")
 @Component
 @NamedQuery(name="Admin.findAll", query="SELECT a FROM Admin a")
 public class Admin implements Serializable {

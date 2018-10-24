@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Entity
+@Table(name="articles")
 @NamedQueries({
 	@NamedQuery(name="Articles.findAll", query="SELECT a FROM Articles a"),
 	@NamedQuery(name="Article.findById", query = "SELECT a FROM Articles a WHERE a.id=:id")

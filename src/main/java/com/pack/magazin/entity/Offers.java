@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 
  */
 @Entity
+@Table(name="offers")
 @NamedQueries({
 	@NamedQuery(name="Offers.findAll", query="SELECT o FROM Offers o"),
 	@NamedQuery(name="Offers.findById", query = "SELECT o FROM Offers o WHERE o.id=:id")

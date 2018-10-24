@@ -9,6 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="orders")
 @NamedQueries({
 	@NamedQuery(name="Orders.findAll", query="SELECT o FROM Orders o"),
 	@NamedQuery(name="Orders.findById", query = "SELECT o FROM Orders o WHERE o.id=:id")
