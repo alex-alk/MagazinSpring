@@ -77,6 +77,9 @@ public class MainQuery {
 	public int getOffset() {
 		return (this.page-1)*this.limit;
 	}
+	public int rOffset() {
+		return offset;
+	}
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}

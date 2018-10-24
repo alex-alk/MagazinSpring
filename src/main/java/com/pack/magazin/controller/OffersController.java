@@ -4,32 +4,25 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.pack.magazin.dao.AdminDAO;
 import com.pack.magazin.dao.ArticlesDAO;
 import com.pack.magazin.dao.ClientsDAO;
 import com.pack.magazin.dao.OffersDAO;
 import com.pack.magazin.dao.OrdersDAO;
 import com.pack.magazin.entity.Admin;
-import com.pack.magazin.entity.Articles;
 import com.pack.magazin.entity.Offers;
-import com.pack.magazin.entity.Orders;
 import com.pack.magazin.model.ArticlesUpload;
 import com.pack.magazin.model.MainQuery;
 import com.pack.magazin.model.OffersUpload;
-import com.pack.magazin.model.OrdersTable;
 
 @Controller
 public class OffersController {

@@ -2,10 +2,8 @@ package com.pack.magazin.controller;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import com.pack.magazin.dao.OffersDAO;
 import com.pack.magazin.entity.Articles;
 import com.pack.magazin.entity.Offers;
 import com.pack.magazin.model.MainQuery;
-import com.pack.magazin.util.CookieUtil;
 
 @Controller
 public class ArticlesController {

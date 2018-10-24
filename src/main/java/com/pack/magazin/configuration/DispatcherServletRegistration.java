@@ -1,14 +1,8 @@
 package com.pack.magazin.configuration;
 
 import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import com.pack.magazin.controller.OffersController;
 
 public class DispatcherServletRegistration extends AbstractAnnotationConfigDispatcherServletInitializer{
 

@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$("#jedit").froalaEditor();
 	time();
+	$("#jedit").froalaEditor();
 });
 function time()
 {
