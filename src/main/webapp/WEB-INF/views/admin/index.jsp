@@ -24,6 +24,7 @@
     		<p style="color:red">${msg}</p>
     		<button type="submit">Intră în cont</button>
     	</form:form>
+    	<p>Development only: utilizator: admin, parola: admin.</p>
     	<p></p>
     </body>
 </html>

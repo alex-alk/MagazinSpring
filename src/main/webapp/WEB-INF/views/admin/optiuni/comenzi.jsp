@@ -26,9 +26,9 @@
     		</tr>
 			<c:forEach var="order" items="${ordersTableList}">
 				<tr>
-					<td>${order.email}</td>
-					<td>${order.name}</td>
-					<td>${order.tel}</td>
+					<td><c:out value="${order.email}"/></td>
+					<td><c:out value="${order.name}"/></td>
+					<td><c:out value="${order.tel}"/></td>
 					<td>${order.artName}</td>
 					<td>${order.quantity}</td>
 					<td><a href="/admin/optiuni/comenzi/sterge?id=${order.orderId}">Șterge</a></td>

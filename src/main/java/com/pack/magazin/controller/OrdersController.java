@@ -75,7 +75,6 @@ public class OrdersController {
 		}
 		articles.add(articlesDAO.getArticolById(id));
 		session.setAttribute("products", articles);
-		System.out.println("products set");
 		return "redirect:/cos";
 	}
 	@RequestMapping(value="/stergeDinCos", method = RequestMethod.GET)
@@ -162,7 +161,7 @@ public class OrdersController {
 				ordersDAO.addOrder(order);
 			i++;
 		}
-		model.addAttribute("msg", "Comanda a fost trimisă");
+		model.addAttribute("msg", "Comanda a fost trimisă. Produsele vor fi disponibile in magazin in 24h.");
 		return "/succes";
 	} 
 }

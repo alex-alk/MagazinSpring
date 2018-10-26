@@ -25,7 +25,7 @@
     		<li><a href="/inregistrare">Înregistrare</a></li>
     		<c:choose>
     			<c:when test="${user != null}">
-    				<li><a href="/intra">Utilizator: ${user.firstName}</a>
+    				<li><a href="/intra">Utilizator: <c:out value="${user.firstName}"/></a>
     			</c:when>
     			<c:otherwise>
     				<li><a href="/intra">Intră în cont</a></li>

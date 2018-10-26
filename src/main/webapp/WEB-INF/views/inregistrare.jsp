@@ -15,7 +15,8 @@
     		<label>Parola:</label><br>
     		<form:input path="password" id="conf1"/><br>
     		<label>Confirmă parola:</label><br>
-    		<input  type="text" id="conf2"><br>
+    		<input  type="text" id="conf2" name="confirmation"><br>
+    		<p style="color: green; font-weight: bold">${msg}</p>
     		<button type="submit">Înregistrare</button><br>
     	</form:form>
     	<p></p>

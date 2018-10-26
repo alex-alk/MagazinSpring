@@ -15,8 +15,6 @@ public class OffersService {
 	
 	@RequestMapping(value="/offers", method= RequestMethod.GET, produces="application/json")
 	public List<Offers> getOffers() {
-		System.out.println("aaaaaaaaaaa");
 		return offersDAO.getAllOffers();
 	}
-	
 }

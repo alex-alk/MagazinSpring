@@ -21,7 +21,7 @@ header a{
 	background-color: green;
 	color: white;
 	padding: 5px;
-	width: 10em;
+	width: 12em;
 	margin-top: 7px;
 	border-radius: 3px;
 }
@@ -345,5 +345,7 @@ div.fr-box div, div.fr-box span.fr-counter{
 	background-color: green;
 	color: white;
 }
-
+div.fr-wrapper>div>a{
+	display: none;
+}
 

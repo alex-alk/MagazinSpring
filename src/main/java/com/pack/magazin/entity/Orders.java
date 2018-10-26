@@ -3,11 +3,6 @@ package com.pack.magazin.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the comenzi database table.
- * 
- */
 @Entity
 @Table(name="orders")
 @NamedQueries({

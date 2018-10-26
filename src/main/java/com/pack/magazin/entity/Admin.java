@@ -2,14 +2,8 @@ package com.pack.magazin.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import org.springframework.stereotype.Component;
 
-
-/**
- * The persistent class for the admin database table.
- * 
- */
 @Entity
 @Table(name="admin")
 @Component
