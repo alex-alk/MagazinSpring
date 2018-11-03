@@ -1,0 +1,351 @@
+body{
+	background-color: #d6e9c6;
+}
+header a:hover{
+	text-decoration: none;
+	color: white;
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+header h1{
+	text-align: center;
+	font-family: serif;
+	color: #255625;
+}
+header li{
+	list-style-type: none;
+	text-align: center;
+}
+header a{
+	display: block;
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 12em;
+	margin-top: 7px;
+	border-radius: 3px;
+}
+header>ul{
+	float: left;
+	margin-left:-30px;
+}
+#headerImg{
+	display: block;
+	margin: 0 auto;
+	width: 30%;
+	min-width: 240px;
+}
+#headerRight a{
+	padding: 0px;
+}
+#headerRight a{
+	text-align: center;
+	padding-bottom: 5px;
+}
+#headerRight{
+	float: right;
+	margin-right: 10px;
+}
+#headerRight>li:nth-child(2){
+	width: 11.6em;
+	text-align: left;
+	font-size: 85%;
+	margin-top: 20px;
+}
+#call{
+	float: left;
+	padding-top: 10px;
+	padding-right: 5px;
+	
+}
+#headerRight p{
+	color: green;
+	font-weight: bold;
+	font-size: 123%;
+	padding-left: 30px;
+}
+#headerRight li:nth-child(1) a{
+	width: 9em;
+	padding-bottom: 5px;
+}
+#cos{
+	float: left;
+	margin-right: -20px;
+}
+#asideLeft{
+	float: left;
+	background-color: rgba(100,150,100,0.5);
+	border-radius: 5px;
+	padding: 5px;
+	margin-left: 2px;
+}
+#asideLeft label{
+	margin-left: 5px;
+}
+#asideLeft label:hover{
+	cursor: pointer;
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+#main{
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	margin-left: 120px;
+	margin-right: 200px;
+	padding: 13px;
+}
+#login{
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	padding: 5px;
+	width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 1%;
+}
+#login button{
+	margin-top: 10px;
+}
+#login button:hover{
+	transform: scale(1.03);
+}
+#opt{
+	list-style-type: none;
+	width: 250px;
+	margin:0 auto;
+	margin-top: 15%;
+}
+#opt li{
+	text-align: center;
+}
+#opt a{
+	display: block;
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 10em;
+	margin-top: 7px;
+	border-radius: 3px;
+}
+#opt a:hover{
+	transform: scale(1.05);
+	text-decoration: none;
+	opacity: 0.8;
+}
+.article{
+	width: 162px;
+	display: inline-block;
+	color:black;
+	box-shadow: 5px 5px 5px #888888;
+	transition: 0.3s;
+	margin: 16px;
+}
+.article:hover{
+	transform: scale(1.02);
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+}
+.article span{
+	border-top: 1px solid green;
+	display: block;
+	border-left: 1px solid green;
+	border-right: 1px solid green;
+	text-align: center;
+}
+.article .price{
+	border-bottom: 1px solid green;
+}
+.article .name{
+	padding: 2px;
+	height: 4em;
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+	width: 162px;
+}
+#cauta{
+	 margin-left: 120px;
+}
+#cauta input{
+	background-color: #c6e9c6;
+}
+.startStyle{
+	list-style-type: none;
+	text-align: center;
+}
+.startStyle a{
+	display: block;
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 10em;
+	margin-top: 7px;
+	border-radius: 3px;
+}
+.button{
+	display:block;
+	color:white;
+	padding: 4px;
+	width: 128px;
+	margin: 16px;
+	background-color: green;
+	color: white;
+	border: 2px solid;
+	border-left-color: white;
+	border-top-color: white;
+	border-right-color: gray;
+	border-bottom-color: gray;
+}
+.description{
+	width: 80%;
+	margin: 0 auto;
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	padding: 30px;
+	min-height: 320px;
+}
+.priceDescription{
+	color: white;
+	background-color: rgb(100,100,100);
+	padding: 3px;
+	border-radius: 2px;
+	float: right;
+	display: block;
+}
+.description h3{
+	text-align: center;
+	margin-bottom: 40px;
+	clear: right;
+}
+.description img{
+	float: left;
+	margin-right: 20px;
+}
+.description p{
+	
+}
+form[action="/cos"] button{
+	width: 8em;
+	margin: 0 auto;
+	display: block;
+	margin-top: 10px;
+}
+#time{
+	color:green;
+    font-weight: bold;
+    padding:1em;
+}
+form[action="/validareComanda"] button{
+	width: 11em;
+	margin: 0 auto;
+	display: block;
+	margin-top: 10px;
+}
+.articlesInCart{
+	border-width: 3px;
+	border-style: double;
+	border-color: #255625;
+	box-shadow: 5px 5px 5px #888888;
+	margin-left: 10px;
+	max-width: 600px;
+	height: 106px;
+	margin-bottom: 5px;
+}
+.articlesInCart img{
+	float: left;
+	width: 100px;
+}
+.articleInCartName{
+	margin-left: 110px;
+}
+.articlesInCart input[type="number"]{
+	width: 10em;
+	background-color: #c6e9c6; 
+}
+.articlesInCart .quantity{
+	margin-left: 10px;
+}
+.remove{
+	background-color: green;
+	color: white;
+	padding: 5px;
+	width: 8.5em;
+	border-radius: 3px;
+	float: right;
+	text-align: center;
+}
+.remove:hover{
+	text-decoration: none;
+	color: white;
+	opacity: 0.8;
+	transform: scale(1.05);
+}
+#validationTable{
+	width: 400px;
+	margin: 0 auto;
+}
+#validationTable, #validationTable th,
+	#validationTable td{
+	border: 1px solid green;
+	text-align: center;
+	padding: 5px;
+}
+form[action="/trimite"] button{
+	width: 11em;
+	margin: 0 auto;
+	display: block;
+	margin-top: 10px;
+}
+.offersAdmin{
+	display: inline-block;
+	margin-left: 20px;
+}
+.offerDelete{
+	
+}
+#tableAdd{
+	margin: 30px;
+}
+#tableAdd, #tableAdd td{
+	border: 1px solid green;
+	text-align: center;
+	padding: 5px;
+}
+div.fr-box{
+	position: absolute; 
+	width: 50%;
+	left: 400px;
+	top: 50px;
+}
+#d{
+	position: absolute;
+	left: 400px;
+	top: 25px;
+	font-weight: bold;
+}
+div.fr-box div, div.fr-box span.fr-counter{
+	background-color: #d6e9c6;
+}
+#asideRight{
+	float: right;
+	margin-right: 10px;
+}
+#paging{
+	width: 300px;
+	margin: 5px auto;
+}
+#paging button{
+	background-color: green;
+	color: white;
+}
+div.fr-wrapper>div>a{
+	display: none;
+}
+

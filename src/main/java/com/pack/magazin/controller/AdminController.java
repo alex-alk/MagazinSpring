@@ -142,8 +142,7 @@ public class AdminController {
     	if (!file.getOriginalFilename().isEmpty()) {
 			String fullFileName = file.getOriginalFilename();
 		 	String fileName = fullFileName.substring(fullFileName.lastIndexOf("\\")+1, fullFileName.length());   	  
-		 	final File folder = new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/uploads");
-		 	System.out.println(sc.getRealPath("/"));
+		 	final File folder = new File(sc.getRealPath("/resources/uploads/"));
 		 	for (final File fileEntry : folder.listFiles()) {
 			  if(fileEntry.getName().equals(fileName)) {
 			     model.addAttribute("msg", "Fișierul există deja");
@@ -157,7 +156,7 @@ public class AdminController {
 		   	articol.setPrice(articlesUpload.getPrice());
 		   	articlesDAO.addArticol(articol);
 	        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(
-	                     						             new File("E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp/resources/uploads", fileName)));
+	                     						             new File(sc.getRealPath("/resources/uploads/"), fileName)));
 	        System.out.println(fileName);
 	        System.out.println(sc.getRealPath("/resources/uploads/"));
 	        outputStream.write(file.getBytes());
@@ -200,6 +199,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/optiuni/sterge",method = RequestMethod.GET)
     public String deleteArticle(Model model, @RequestParam("id")String idStr, HttpServletRequest request, Admin admin) throws IOException {
 		HttpSession session = request.getSession();
+		ServletContext sc = request.getServletContext();
 		model.addAttribute(admin);
 		if(session.getAttribute("admin")==null) {
 			model.addAttribute("msg","Trebuie să vă logați.");
@@ -207,7 +207,7 @@ public class AdminController {
 		}
 		model.addAttribute("mainQuery", mainQuery);
 		Articles articol = articlesDAO.getArticolById(idStr);
-	 	String fileURL = "E:/Projects/Eclipse EE workspace/MagazinSpring/src/main/webapp" + articol.getImageURL();
+	 	String fileURL = sc.getRealPath("/") + articol.getImageURL();
 	 	File file = new File(fileURL);
 	   	file.delete();
 	   	int id = Integer.parseInt(idStr);

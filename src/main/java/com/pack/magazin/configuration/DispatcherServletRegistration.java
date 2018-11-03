@@ -23,7 +23,7 @@ public class DispatcherServletRegistration extends AbstractAnnotationConfigDispa
         registration.setMultipartConfig(getMultipartConfigElement());
     }
     private MultipartConfigElement getMultipartConfigElement() {
-        MultipartConfigElement multipartConfigElement = new MultipartConfigElement( "/resources/temp", MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement( "/usr/local/tomcat/webapps/ROOT/resources/temp", MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
         return multipartConfigElement;
     }
     private static final long MAX_FILE_SIZE = 5242880;
