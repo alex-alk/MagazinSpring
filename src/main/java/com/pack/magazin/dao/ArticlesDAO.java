@@ -58,8 +58,8 @@ public class ArticlesDAO {
 		Root<Articles> c = q.from(Articles.class);
 		
 		if(mainQuery.nothingSelected()){
-			q.select(c).where(cb.like(c.get("name"), "%"+mainQuery.getText()+"%"))
-			.orderBy(cb.asc(c.get(mainQuery.orderBy())));
+			q.select(c).where(cb.like(c.get("name"), "%"+mainQuery.getText()+"%"));
+//			.orderBy(cb.asc(c.get(mainQuery.orderBy())));
 		}else {
 			q.select(c).where(
 					cb.or(

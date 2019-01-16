@@ -8,7 +8,7 @@
 		<class>com.pack.magazin.entity.Orders</class>
 		<class>com.pack.magazin.entity.Offers</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql:3306/baza"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://35.234.67.144:3306/baza"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value="root"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
